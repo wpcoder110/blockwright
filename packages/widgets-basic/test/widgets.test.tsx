@@ -134,3 +134,31 @@ describe('nav menu', () => {
     expect(css.css).toContain('.bw-el-nav1{--bw-nav-justify:center;--bw-nav-color:#123456;--bw-nav-px:20px}')
   })
 })
+
+describe('image sizing', () => {
+  it('image box width, height and spacing are set per element', async () => {
+    const { html, css } = await render('image-box', {
+      image: { url: '/a.jpg', width: 800, height: 600, alt: 'A' },
+      image_size: { unit: '%', size: 60 },
+      bw_image_height: { unit: 'px', size: 140 },
+      image_space: { unit: 'px', size: 30 },
+      position: 'left',
+    })
+    expect(css.css).toContain('.bw-el-w1{--bw-box-media-w:60%;--bw-box-gap:30px}')
+    expect(css.css).toContain('.bw-el-w1 .bw-box-media img{height:140px;object-fit:cover}')
+    // the base CSS only provides fallbacks, so element values win
+    expect(css.base['image-box']).toContain('gap:var(--bw-box-gap,15px)')
+    expect(css.base['image-box']).toContain('width:var(--bw-box-media-w,30%)')
+    expect(html).toContain('bw-box-left')
+  })
+
+  it('image widget width, max width and height are applied', async () => {
+    const { css } = await render('image', {
+      image: { url: '/a.jpg', width: 800, height: 600 },
+      width: { unit: '%', size: 50 },
+      space: { unit: '%', size: 80 },
+      height: { unit: 'px', size: 120 },
+    })
+    expect(css.css).toContain('.bw-el-w1 img{width:50%;max-width:80%;height:120px}')
+  })
+})

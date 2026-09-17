@@ -119,7 +119,17 @@ export async function BlockwrightWelcome({ payload, searchParams }: { payload?: 
 /* "Edit with Blockwright" sidebar button                              */
 /* ------------------------------------------------------------------ */
 
-export function EditWithBlockwright({ id, collectionSlug, payload }: { id?: string | number; collectionSlug?: string; payload?: BasePayload }) {
+export function EditWithBlockwright({
+  id,
+  collectionSlug,
+  payload,
+  data,
+}: {
+  id?: string | number
+  collectionSlug?: string
+  payload?: BasePayload
+  data?: Record<string, unknown>
+}) {
   const admin = payload?.config.routes?.admin ?? '/admin'
   if (!id || !collectionSlug) {
     return (
@@ -129,15 +139,28 @@ export function EditWithBlockwright({ id, collectionSlug, payload }: { id?: stri
       </div>
     )
   }
+  let viewUrl: string | null = null
+  if (payload) {
+    try {
+      const { options } = getBlockwrightRuntime(payload)
+      const isPublic = options.collectionConfig[collectionSlug]?.public
+      const published = !data?._status || data._status === 'published'
+      if (isPublic && published && data) viewUrl = options.previewUrl?.({ collection: collectionSlug, doc: data }) ?? null
+    } catch {
+      viewUrl = null
+    }
+  }
+  const btn: React.CSSProperties = { display: 'flex', justifyContent: 'center', margin: 0, width: '100%', textDecoration: 'none' }
   return (
-    <div style={{ marginBottom: 'var(--base, 20px)' }}>
-      <a
-        href={`${admin}/blockwright/edit/${collectionSlug}/${id}`}
-        className="btn btn--style-primary btn--size-medium"
-        style={{ display: 'flex', justifyContent: 'center', margin: 0, width: '100%', textDecoration: 'none' }}
-      >
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 'var(--base, 20px)' }}>
+      <a href={`${admin}/blockwright/edit/${collectionSlug}/${id}`} className="btn btn--style-primary btn--size-medium" style={btn}>
         Edit with Blockwright
       </a>
+      {viewUrl ? (
+        <a href={viewUrl} target="_blank" rel="noopener" className="btn btn--style-secondary btn--size-medium" style={btn}>
+          View page
+        </a>
+      ) : null}
     </div>
   )
 }

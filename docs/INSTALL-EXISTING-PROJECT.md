@@ -29,12 +29,11 @@ Put it next to your project, not inside it:
 cd C:\Users\dell\projects
 git clone https://github.com/wpcoder110/blockwright-alpha.git
 cd blockwright-alpha
-git checkout feat/m0-foundation
 pnpm install
 pnpm pack:local
 ```
 
-The repository is private, so the first `git clone` opens a GitHub sign-in window. `pnpm pack:local` builds everything and writes seven `.tgz` files to `blockwright-alpha\release`.
+The repository is private, so the first `git clone` opens a GitHub sign-in window. `pnpm pack:local` builds everything and writes the `.tgz` files to `blockwright-alpha\release`. Once Blockwright is on npm this step disappears: you will just run `npm install blockwright`.
 
 ## 3. Install it into your project
 
@@ -66,7 +65,7 @@ Open `dev\payload.config.ts` and make three changes. The full result is in `exam
 
 ```ts
 // 1. imports, at the top
-import { blockwrightPlugin } from '@blockwright/payload-plugin'
+import { blockwrightPlugin } from 'blockwright'
 import { Pages } from './collections/Pages.js'
 
 // 2. add Pages to the collections array
@@ -79,7 +78,7 @@ collections: [
 // 3. add the plugin to the plugins array
 plugins: [
   rlt({ collections: { posts: true } }),
-  blockwrightPlugin({ collections: ['pages'] }),
+  blockwrightPlugin({ collections: { pages: { public: true } } }),
 ],
 ```
 
@@ -137,6 +136,6 @@ Always regenerate the import map after updating: new versions can add admin comp
 If your project is not based on the plugin template:
 
 - Your config is usually `src\payload.config.ts`, and the app folder is `src\app`. Copy the example files there instead of into `dev`.
-- If you already have a `pages` collection with a `slug` field, skip `Pages.ts` and just add `blockwrightPlugin({ collections: ['pages'] })`.
+- If you already have a `pages` collection with a `slug` field, skip `Pages.ts` and just add `blockwrightPlugin({ collections: { pages: { public: true } } })`. Any collection works: `collections: { posts: { public: true, url: (doc) => `/blog/${doc.slug}` }, banners: true }`.
 - If your site already has a page at `/` (for example `src\app\(frontend)\page.tsx`), rename the example route folder from `[[...slug]]` to `[...slug]`. Blockwright pages then render at `/about`, `/contact` and so on, while your home page stays as it is.
 - Run `npx payload generate:importmap` after adding the plugin.

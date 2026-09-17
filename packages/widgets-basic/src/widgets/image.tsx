@@ -79,7 +79,7 @@ export const image = defineWidget({
       select('link_to', { label: 'Link', options: opts({ none: 'None', file: 'Media file', custom: 'Custom URL' }), default: 'none' }),
       url('link', { label: 'URL', dynamic: ['url'], condition: { link_to: 'custom' } }),
       switcher('bw_priority', { label: 'Load first', description: 'Turn on for the main image at the top of the page to improve Largest Contentful Paint.' }),
-      text('bw_sizes', { label: 'Sizes attribute', placeholder: '(max-width: 767px) 100vw, 50vw' }),
+      text('bw_sizes', { label: 'Sizes attribute', placeholder: '(max-width: 767px) 100vw, 50vw', description: 'Optional. Tells the browser how wide the image will be, so it can download a smaller file.' }),
     ]),
     section(
       'section_style_image',

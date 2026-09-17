@@ -109,11 +109,16 @@ Templates and library:
 - [ ] Select a frame and click the save icon in its toolbar to save it as a template. Open the **Library** on another page and insert it.
 - [ ] **Library → Export** downloads a JSON file; **Library → Import** accepts the file by drag and drop, shows a preview, and inserts it or saves it to the library.
 
+Images:
+
+- [ ] Add an Image widget, choose an uploaded image, and set Width to 50%: the image resizes. Do the same with an Image box (Width, Height and Spacing).
+- [ ] View the page source: the `srcset` offers the image at its real size, not an upscaled one, and the image loads.
+
 ## 5. Admin
 
 - [ ] **Dashboard:** the Blockwright panel shows four steps, with links that work.
-- [ ] **Site style:** change *Teal* (`accent`) to another color and save. Buttons on the site change on reload.
-- [ ] **Site style → Fonts:** change *Headings* to `Poppins`. Headings change, and the Google Fonts request includes Poppins.
+- [ ] **Site style → Colors:** each row shows its swatch and name. Change *Teal* (`accent`) with the colour picker or a preset and save. Buttons on the site change on reload.
+- [ ] **Site style → Fonts:** change *Headings* to `Poppins`; a sample of the font appears under the field. Headings change, and the Google Fonts request includes Poppins.
 - [ ] **Invalid layout:** add `{"elType":"widget"}` to the layout array and save. Saving is blocked with "Invalid layout: …".
 - [ ] **HTML cleaning:** in a Text widget, switch the editor to HTML, add `<script>alert(1)</script>` and save. The script is removed.
 - [ ] **Form entries:** open an entry. The answers show as a table; **Print or save as PDF** opens a printable page.

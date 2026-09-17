@@ -1,6 +1,6 @@
 import configPromise from '@payload-config'
-import { BlockwrightDocument, BlockwrightLocation, documentMetadata, findDocumentBySlug, singularTheme } from '@blockwright/next'
-import { getSiteInfo } from '@blockwright/payload-plugin'
+import { BlockwrightDocument, BlockwrightLocation, documentMetadata, findDocumentBySlug, singularTheme } from 'blockwright/next'
+import { getSiteInfo } from 'blockwright'
 import type { Metadata } from 'next'
 import { draftMode, headers } from 'next/headers'
 import { notFound } from 'next/navigation'

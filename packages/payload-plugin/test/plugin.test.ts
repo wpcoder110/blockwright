@@ -7,7 +7,7 @@ const baseConfig = {
   collections: [
     { slug: 'users', auth: true, fields: [] },
     { slug: 'media', upload: true, fields: [] },
-    { slug: 'pages', fields: [{ name: 'title', type: 'text' }] },
+    { slug: 'pages', fields: [{ name: 'title', type: 'text' }, { name: 'slug', type: 'text' }] },
   ],
 } as unknown as Config
 
@@ -18,7 +18,7 @@ describe('plugin config', () => {
     const slugs = config.collections!.map((c) => c.slug)
     expect(slugs).toEqual(['users', 'media', 'pages', 'bw-templates', 'bw-form-entries', 'bw-menus', 'bw-widgets'])
     const pages = config.collections!.find((c) => c.slug === 'pages')!
-    expect(pages.fields.map((f) => ('name' in f ? f.name : ''))).toEqual(['blockwrightEdit', 'title', 'layout'])
+    expect(pages.fields.map((f) => ('name' in f ? f.name : ''))).toEqual(['blockwrightEdit', 'title', 'slug', 'layout'])
     expect(pages.hooks?.beforeChange).toHaveLength(1)
     expect(config.globals!.map((g) => g.slug)).toEqual(['bw-site-style'])
     expect(config.endpoints!.map((e) => `${e.method} ${e.path}`)).toEqual([
@@ -30,7 +30,39 @@ describe('plugin config', () => {
       'get /bw/menus/:id',
     ])
     expect(config.admin?.components?.views?.blockwrightEditor?.path).toBe('/blockwright/edit/:collection/:id')
-    expect(config.admin?.components?.beforeDashboard).toContain('@blockwright/payload-plugin/rsc#BlockwrightWelcome')
+    expect(config.admin?.components?.beforeDashboard).toContain('blockwright/rsc#BlockwrightWelcome')
+  })
+
+  it('marks collections with a slug field as public and adds a preview URL', () => {
+    const pages = config.collections!.find((c) => c.slug === 'pages')!
+    const rt = getBlockwrightRuntime({ config } as never)
+    expect(rt.options.collectionConfig.pages).toMatchObject({ public: true, field: 'layout' })
+    expect(typeof pages.admin?.preview).toBe('function')
+    expect(rt.options.previewUrl!({ collection: 'pages', doc: { slug: 'about' } })).toBe('/about')
+    expect(rt.options.previewUrl!({ collection: 'pages', doc: { slug: 'home' } })).toBe('/')
+  })
+
+  it('accepts per-collection options and can be disabled', () => {
+    const custom = blockwrightPlugin({
+      collections: { pages: { public: false }, media: { url: () => null } },
+      disabled: true,
+      adminGroup: 'Site',
+    })(baseConfig) as Config
+    const rt = getBlockwrightRuntime({ config: custom } as never)
+    expect(rt.options.collections).toEqual(['pages', 'media'])
+    expect(rt.options.collectionConfig.pages!.public).toBe(false)
+    expect(rt.options.adminGroup).toBe('Site')
+    expect(custom.endpoints).toBeUndefined()
+    expect(custom.collections!.map((c) => c.slug)).toContain('bw-templates')
+  })
+
+  it('applies collection overrides', () => {
+    const custom = blockwrightPlugin({
+      templatesOverrides: { slug: 'bw-templates', admin: { group: 'Design' }, fields: ({ defaultFields }) => [...defaultFields, { name: 'note', type: 'text' }] },
+    })(baseConfig) as Config
+    const templates = custom.collections!.find((c) => c.slug === 'bw-templates')!
+    expect(templates.admin?.group).toBe('Design')
+    expect(templates.fields.some((f) => 'name' in f && f.name === 'note')).toBe(true)
   })
 
   it('exposes the runtime and registers the widgets', () => {

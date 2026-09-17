@@ -1,0 +1,119 @@
+{
+  "name": "blockwright",
+  "version": "0.1.0-alpha.0",
+  "description": "Visual page and theme builder for Payload CMS: drag-and-drop editor, widgets, forms, menus and theme templates",
+  "keywords": [
+    "payload",
+    "payload-plugin",
+    "cms",
+    "page builder",
+    "visual editor",
+    "drag and drop",
+    "elementor",
+    "forms",
+    "theme builder",
+    "react",
+    "nextjs"
+  ],
+  "homepage": "https://github.com/wpcoder110/blockwright-alpha#readme",
+  "bugs": "https://github.com/wpcoder110/blockwright-alpha/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "directory": "packages/blockwright"
+  },
+  "license": "MIT",
+  "author": "Ahmer Hassan (https://redlionstech.com)",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "default": "./dist/client.js"
+    },
+    "./rsc": {
+      "types": "./dist/rsc.d.ts",
+      "import": "./dist/rsc.js",
+      "default": "./dist/rsc.js"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.js",
+      "default": "./dist/next.js"
+    },
+    "./widgets": {
+      "types": "./dist/widgets.d.ts",
+      "import": "./dist/widgets.js",
+      "default": "./dist/widgets.js"
+    },
+    "./forms": {
+      "types": "./dist/forms.d.ts",
+      "import": "./dist/forms.js",
+      "default": "./dist/forms.js"
+    },
+    "./core": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "default": "./dist/core.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "clean": "node ../../scripts/rm.mjs dist .turbo"
+  },
+  "dependencies": {
+    "@blockwright/core": "workspace:*",
+    "@blockwright/editor": "workspace:*",
+    "@blockwright/forms": "workspace:*",
+    "@blockwright/next": "workspace:*",
+    "@blockwright/payload-plugin": "workspace:*",
+    "@blockwright/renderer": "workspace:*",
+    "@blockwright/schema": "workspace:*",
+    "@blockwright/widgets-basic": "workspace:*"
+  },
+  "peerDependencies": {
+    "next": "^15.0.0 || ^16.0.0",
+    "payload": "^3.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "next": "16.3.3",
+    "payload": "3.89.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

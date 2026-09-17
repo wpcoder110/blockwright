@@ -142,25 +142,32 @@ Run from the repository root.
 
 **Step-by-step for Windows and the Payload plugin template: [`docs/INSTALL-EXISTING-PROJECT.md`](docs/INSTALL-EXISTING-PROJECT.md).** It is tested end to end with npm.
 
-The packages are not on npm yet. Until the first release, run `pnpm pack:local` here and install the files from `release/` with `npm install`. Once published:
+Blockwright ships as **one package**, like the official Payload plugins:
 
 ```bash
-pnpm add @blockwright/payload-plugin @blockwright/next
+pnpm add blockwright
 ```
+
+It is not on npm yet, so until the first release run `pnpm pack:local` here and install the files from `release/` with `npm install` (see [`docs/RELEASING.md`](docs/RELEASING.md)).
 
 **1. Register the plugin** in `payload.config.ts`:
 
 ```ts
-import { blockwrightPlugin } from '@blockwright/payload-plugin'
+import { blockwrightPlugin } from 'blockwright'
 
 export default buildConfig({
   // ...
   plugins: [
     blockwrightPlugin({
-      collections: ['pages'], // collections that get a Blockwright layout
+      // a list of slugs, or options per collection
+      collections: {
+        pages: { public: true }, // adds "View page" and Payload's preview button
+        posts: { public: true, url: (doc) => `/blog/${doc.slug}` },
+        banners: true, // no public URL, so no View button
+      },
       forms: {
-        emailTo: 'owner@example.com', // fallback recipient
-        emailFrom: 'website@example.com',
+        defaultToEmail: 'owner@example.com',
+        defaultFromEmail: 'website@example.com',
         allowedCollections: ['leads'], // for the "Create document" action
       },
     }),
@@ -181,7 +188,7 @@ Then run `payload generate:importmap`. Forms send email through the email adapte
 **2. Render pages** in your Next.js route:
 
 ```tsx
-import { BlockwrightDocument, BlockwrightLocation, findDocumentBySlug, singularTheme } from '@blockwright/next'
+import { BlockwrightDocument, BlockwrightLocation, findDocumentBySlug, singularTheme } from 'blockwright/next'
 
 export default async function Page({ params, searchParams }) {
   const payload = await getPayload({ config })
@@ -206,21 +213,25 @@ export default async function Page({ params, searchParams }) {
 
 ### Plugin options
 
+Options follow the conventions of the official Payload plugins: `disabled`, per-collection settings, and `…Overrides` to change any generated collection.
+
 | Option | Default | Purpose |
 | --- | --- | --- |
-| `collections` | `['pages']` | Collections that get the layout field |
+| `collections` | `['pages']` | Collections that get the layout field. Per collection: `public`, `url(doc)`, `field` |
+| `disabled` | `false` | Keeps the schema but skips hooks, endpoints and admin components |
+| `templatesOverrides`, `formEntriesOverrides`, `menusOverrides`, `widgetsOverrides`, `siteStyleOverrides` | — | Change a generated collection or global, including `fields({ defaultFields })` |
 | `elements` / `tags` | — | Register your own widgets and dynamic values |
 | `templates.slug` | `bw-templates` | Slug of the templates collection |
 | `kit.slug` | `bw-site-style` | Slug of the site style global |
 | `forms.submissionsSlug` | `bw-form-entries` | Slug of the form entries collection |
-| `forms.emailTo` / `emailFrom` / `emailFromName` | — | Email defaults |
+| `forms.defaultToEmail` / `defaultFromEmail` / `defaultFromName` | — | Email defaults |
 | `forms.allowedCollections` | `[]` | Collections the "Create document" action may write to |
 | `forms.webhookSecret` | — | Adds an `X-Blockwright-Signature: sha256=…` header to webhooks |
 | `forms.rateLimit` | 10 per minute | `{ max, windowMs }`, or `false` to disable |
 | `forms.storeIp` | `false` | Save visitor IP addresses with entries |
 | `canUseUnfilteredHtml` | admin users | Who may save Custom HTML and custom CSS |
-| `previewUrl` | `/<slug>` | Public URL used by the editor's "View page" button |
 | `onChange` | — | Called when templates, the site style or pages change (for cache revalidation) |
+| `uploadCollection` | `media` | Upload collection used for images |
 | `adminGroup` | `Blockwright` | Admin sidebar group |
 
 ## Repository structure

@@ -24,7 +24,7 @@ export function submissionsCollection(rt: BlockwrightRuntime): CollectionConfig 
       {
         name: 'entryView',
         type: 'ui',
-        admin: { components: { Field: '@blockwright/payload-plugin/rsc#FormEntryView' } },
+        admin: { components: { Field: 'blockwright/rsc#FormEntryView' } },
       },
       { name: 'summary', type: 'text', admin: { readOnly: true, hidden: true } },
       {

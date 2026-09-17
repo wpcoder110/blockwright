@@ -31,15 +31,24 @@ export function kitGlobal(rt: BlockwrightRuntime): GlobalConfig {
               {
                 name: 'colors',
                 type: 'array',
+                labels: { singular: 'Color', plural: 'Colors' },
                 defaultValue: DEFAULT_KIT.colors.map((c) => ({ colorId: c.id, title: c.title, color: c.color })),
-                admin: { description: 'Referenced by widgets as global colors. Changing a color updates it everywhere.' },
+                admin: {
+                  description: 'Referenced by widgets as global colors. Changing a color updates it everywhere.',
+                  components: { RowLabel: 'blockwright/client#ColorRowLabel' },
+                },
                 fields: [
                   {
                     type: 'row',
                     fields: [
                       { name: 'title', type: 'text', required: true },
                       { name: 'colorId', type: 'text', required: true, admin: { description: 'Lowercase id, e.g. primary' } },
-                      { name: 'color', type: 'text', required: true, admin: { description: 'Hex, rgb() or hsl()' } },
+                      {
+                        name: 'color',
+                        type: 'text',
+                        required: true,
+                        admin: { description: 'Hex, rgb() or hsl()', components: { Field: 'blockwright/client#ColorField' } },
+                      },
                     ],
                   },
                 ],
@@ -52,6 +61,8 @@ export function kitGlobal(rt: BlockwrightRuntime): GlobalConfig {
               {
                 name: 'typography',
                 type: 'array',
+                labels: { singular: 'Font', plural: 'Fonts' },
+                admin: { components: { RowLabel: 'blockwright/client#TypographyRowLabel' } },
                 defaultValue: DEFAULT_KIT.typography.map((t) => ({ typoId: t.id, title: t.title, fontFamily: t.fontFamily, fontWeight: t.fontWeight })),
                 fields: [
                   {
@@ -59,7 +70,7 @@ export function kitGlobal(rt: BlockwrightRuntime): GlobalConfig {
                     fields: [
                       { name: 'title', type: 'text', required: true },
                       { name: 'typoId', type: 'text', required: true },
-                      { name: 'fontFamily', type: 'text', admin: { description: 'Google Fonts family, e.g. Inter' } },
+                      { name: 'fontFamily', type: 'text', admin: { description: 'Google Fonts family, e.g. Inter', components: { Field: 'blockwright/client#FontField' } } },
                     ],
                   },
                   {

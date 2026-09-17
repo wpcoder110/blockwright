@@ -17,7 +17,9 @@
     "db:down": "docker compose down",
     "seed": "pnpm --filter dev seed",
     "format": "prettier --write .",
-    "pack:local": "pnpm build && node scripts/pack-local.mjs"
+    "pack:local": "pnpm build && node scripts/pack-local.mjs",
+    "version:set": "node scripts/version.mjs",
+    "release:check": "pnpm build && pnpm typecheck && pnpm test && node scripts/pack-local.mjs"
   },
   "devDependencies": {
     "@types/node": "22.19.9",

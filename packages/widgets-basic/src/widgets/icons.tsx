@@ -114,7 +114,8 @@ const boxStyle = (kind: 'icon' | 'image') => [
           spacing('icon_space', 'Spacing', W, '--bw-box-gap'),
         ]
       : [
-          slider('image_size', { label: 'Width', responsive: true, units: ['%', 'px', 'custom'], selectors: { [`${W} .bw-box-media`]: 'width: {{SIZE}}{{UNIT}};' } }),
+          slider('image_size', { label: 'Width', responsive: true, units: ['%', 'px', 'custom'], selectors: { [W]: '--bw-box-media-w: {{SIZE}}{{UNIT}};' } }),
+          slider('bw_image_height', { label: 'Height', responsive: true, units: ['px', 'vh', 'custom'], selectors: { [`${W} .bw-box-media img`]: 'height: {{SIZE}}{{UNIT}}; object-fit: cover;' } }),
           spacing('image_space', 'Spacing', W, '--bw-box-gap'),
           dimensions('image_border_radius', { label: 'Border radius', selectors: { [`${W} .bw-box-media img`]: 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};' } }),
         ],
@@ -174,7 +175,8 @@ function Box({ settings, ctx, kind }: RenderProps & { kind: 'icon' | 'image' }) 
 }
 
 const BOX_CSS =
-  '.bw-box{--bw-box-gap:15px;display:flex;flex-direction:column;gap:var(--bw-box-gap);align-items:center}' +
+  '.bw-w-icon-box,.bw-w-image-box{--bw-box-gap:15px}' +
+  '.bw-box{display:flex;flex-direction:column;gap:var(--bw-box-gap,15px);align-items:center}' +
   '.bw-box-left{flex-direction:row;align-items:flex-start}.bw-box-right{flex-direction:row-reverse;align-items:flex-start}' +
   '.bw-box-media{flex:none;line-height:0}.bw-box-media img{display:block;max-width:100%;height:auto}' +
   '.bw-box-content{flex:1;min-width:0}' +
@@ -201,7 +203,11 @@ export const imageBox = defineWidget({
   keywords: ['image', 'feature', 'card', 'box'],
   render: ((p: RenderProps) => <Box {...p} kind="image" />) as never,
   sections: [section('section_image', 'Image box', boxControls('image')), ...boxStyle('image')],
-  baseCss: BOX_CSS + '.bw-w-image-box .bw-box-media{width:30%}.bw-w-image-box .bw-box-top .bw-box-media{width:100%}',
+  baseCss:
+    BOX_CSS +
+    '.bw-w-image-box .bw-box-media{width:var(--bw-box-media-w,30%)}' +
+    '.bw-w-image-box .bw-box-top .bw-box-media{width:var(--bw-box-media-w,100%)}' +
+    '.bw-w-image-box .bw-box-media img{width:100%}',
 })
 
 /* ---------------------------- Icon list --------------------------- */

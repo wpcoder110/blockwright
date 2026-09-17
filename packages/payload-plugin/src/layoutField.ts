@@ -14,7 +14,7 @@ export function editButtonField(): Field {
     type: 'ui',
     admin: {
       position: 'sidebar',
-      components: { Field: '@blockwright/payload-plugin/rsc#EditWithBlockwright' },
+      components: { Field: 'blockwright/rsc#EditWithBlockwright' },
     },
   }
 }
@@ -52,10 +52,21 @@ export function layoutBeforeChange(rt: BlockwrightRuntime, fieldName = LAYOUT_FI
   }
 }
 
-/** Add the layout field and hooks to an existing collection. */
+/** Add the layout field, preview URL and hooks to an existing collection. */
 export function withLayout(collection: CollectionConfig, rt: BlockwrightRuntime): CollectionConfig {
   const hasField = collection.fields.some((f) => 'name' in f && f.name === LAYOUT_FIELD)
   const onChange = rt.options.onChange
+  const cfg = rt.options.collectionConfig[collection.slug]
+  // public collections get Payload's own preview button
+  const preview: NonNullable<CollectionConfig['admin']>['preview'] = collection.admin?.preview
+    ? collection.admin.preview
+    : cfg?.public
+      ? ((doc, { req }) => {
+          const path = rt.options.previewUrl?.({ collection: collection.slug, doc: doc as Record<string, unknown> })
+          if (!path) return null
+          return `${req.payload.config.serverURL ?? ''}${path}`
+        })
+      : undefined
   return {
     ...collection,
     fields: hasField ? collection.fields : [editButtonField(), ...collection.fields, layoutField()],
@@ -69,6 +80,7 @@ export function withLayout(collection: CollectionConfig, rt: BlockwrightRuntime)
         ...(onChange ? [async ({ doc }: { doc: Record<string, unknown> }) => void (await onChange({ collection: collection.slug, doc }))] : []),
       ],
     },
+    admin: { ...collection.admin, ...(preview ? { preview } : {}) },
     custom: { ...collection.custom, blockwright: true },
   }
 }

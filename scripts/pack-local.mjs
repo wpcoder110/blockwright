@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const out = path.join(root, 'release')
-const packages = ['schema', 'core', 'renderer', 'widgets-basic', 'forms', 'editor', 'payload-plugin', 'next']
+const packages = ['schema', 'core', 'renderer', 'widgets-basic', 'forms', 'editor', 'payload-plugin', 'next', 'blockwright']
 
 rmSync(out, { recursive: true, force: true })
 mkdirSync(out)

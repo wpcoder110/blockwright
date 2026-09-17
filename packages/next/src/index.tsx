@@ -5,9 +5,9 @@ import { getBlockwrightRuntime, getMenu, getRegistry, getSiteInfo, getTemplates 
 import { Blockwright, buildLayout } from '@blockwright/renderer'
 import type { Element } from '@blockwright/schema'
 import type { BasePayload } from 'payload'
-import { BlockwrightNextImage, BlockwrightNextLink } from './adapters'
+import { BlockwrightNextLink, createNextImage } from './adapters'
 
-export { BlockwrightNextImage, BlockwrightNextLink }
+export { BlockwrightNextImage, BlockwrightNextLink, createNextImage, toLocalSrc } from './adapters'
 export type { ThemeLocation, ThemeRequest }
 
 export type SearchParams = Record<string, string | string[] | undefined>
@@ -47,7 +47,7 @@ export async function createRenderContext(opts: ContextOptions): Promise<RenderC
     user: opts.user ?? null,
     archive: opts.archive,
     formEndpoint: `${api}/bw/forms/submit`,
-    components: opts.plainElements ? {} : { Image: BlockwrightNextImage, Link: BlockwrightNextLink },
+    components: opts.plainElements ? {} : { Image: createNextImage({ serverURL: payload.config.serverURL }), Link: BlockwrightNextLink },
     services: {
       find: async ({ collection, where, limit, sort, depth }) => {
         const res = await payload.find({ collection: collection as never, where: where as never, limit, sort, depth: depth ?? 1, overrideAccess: false })

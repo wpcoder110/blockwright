@@ -104,7 +104,7 @@ export function submitEndpoint(rt: BlockwrightRuntime): Endpoint {
           .slice(0, 120)
 
       // with no recipient configured anywhere, notify the first admin user
-      let fallbackTo = options.forms.emailTo
+      let fallbackTo = options.forms.defaultToEmail
       if (!fallbackTo && !settings.email_to) {
         const userSlug = payload.config.admin?.user ?? 'users'
         const first = await payload
@@ -118,8 +118,8 @@ export function submitEndpoint(rt: BlockwrightRuntime): Endpoint {
         siteName: site?.siteName,
         siteUrl: site?.siteUrl,
         defaultEmailTo: fallbackTo,
-        defaultEmailFrom: options.forms.emailFrom,
-        defaultEmailFromName: options.forms.emailFromName ?? site?.siteName,
+        defaultEmailFrom: options.forms.defaultFromEmail,
+        defaultEmailFromName: options.forms.defaultFromName ?? site?.siteName,
         webhookSecret: options.forms.webhookSecret,
         emailAccent: Array.isArray(site?.colors) ? site.colors.find((c: { colorId?: string }) => c.colorId === 'primary')?.color : undefined,
         entryUrl: (entryId) => `${payload.config.serverURL ?? ''}${payload.config.routes?.admin ?? '/admin'}/collections/${options.submissionsSlug}/${entryId}`,

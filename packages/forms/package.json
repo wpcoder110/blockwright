@@ -32,7 +32,9 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
@@ -59,5 +61,21 @@
     "react-dom": "19.2.6",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3"
-  }
+  },
+  "author": "Ahmer Hassan (https://redlionstech.com)",
+  "homepage": "https://github.com/wpcoder110/blockwright-alpha#readme",
+  "bugs": "https://github.com/wpcoder110/blockwright-alpha/issues",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "payload",
+    "payload-plugin",
+    "blockwright",
+    "page builder"
+  ]
 }

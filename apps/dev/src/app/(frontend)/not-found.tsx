@@ -1,5 +1,5 @@
 import configPromise from '@payload-config'
-import { BlockwrightLocation, notFoundTheme } from '@blockwright/next'
+import { BlockwrightLocation, notFoundTheme } from 'blockwright/next'
 import { connection } from 'next/server'
 import { getPayload } from 'payload'
 

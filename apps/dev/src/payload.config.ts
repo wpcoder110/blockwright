@@ -1,7 +1,7 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import { blockwrightPlugin } from '@blockwright/payload-plugin'
+import { blockwrightPlugin } from 'blockwright'
 import path from 'path'
 import { buildConfig } from 'payload'
 import sharp from 'sharp'
@@ -42,10 +42,11 @@ export default buildConfig({
   sharp,
   plugins: [
     blockwrightPlugin({
-      collections: ['pages'],
+      // `pages` is public, so the admin shows a "View page" button and Payload's preview
+      collections: { pages: { public: true } },
       forms: {
-        emailTo: process.env.FORMS_EMAIL_TO,
-        emailFrom: process.env.EMAIL_FROM,
+        defaultToEmail: process.env.FORMS_EMAIL_TO,
+        defaultFromEmail: process.env.EMAIL_FROM,
         allowedCollections: [],
         rateLimit: { max: Number(process.env.FORMS_RATE_LIMIT || 10), windowMs: 60_000 },
       },

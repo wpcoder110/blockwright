@@ -3,7 +3,7 @@
  * Safe to run repeatedly: demo documents are replaced.
  * The same content can be installed from the admin dashboard.
  */
-import { installDemoContent } from '@blockwright/payload-plugin'
+import { installDemoContent } from 'blockwright'
 import { getPayload } from 'payload'
 import config from '../payload.config'
 

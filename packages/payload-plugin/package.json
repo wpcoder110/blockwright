@@ -22,10 +22,17 @@
       "types": "./dist/client.d.ts",
       "import": "./dist/client.js",
       "default": "./dist/client.js"
+    },
+    "./types": {
+      "types": "./dist/exports/types.d.ts",
+      "import": "./dist/exports/types.js",
+      "default": "./dist/exports/types.js"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
@@ -51,7 +58,8 @@
   "peerDependencies": {
     "payload": "^3.0.0",
     "react": "^19.0.0",
-    "next": "^15.0.0 || ^16.0.0"
+    "next": "^15.0.0 || ^16.0.0",
+    "@payloadcms/ui": "^3.0.0"
   },
   "devDependencies": {
     "payload": "3.89.0",
@@ -59,6 +67,23 @@
     "@types/react": "19.2.14",
     "@types/sanitize-html": "^2.16.0",
     "next": "16.3.3",
-    "react-dom": "19.2.6"
-  }
+    "react-dom": "19.2.6",
+    "@payloadcms/ui": "3.89.0"
+  },
+  "author": "Ahmer Hassan (https://redlionstech.com)",
+  "homepage": "https://github.com/wpcoder110/blockwright-alpha#readme",
+  "bugs": "https://github.com/wpcoder110/blockwright-alpha/issues",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "payload",
+    "payload-plugin",
+    "blockwright",
+    "page builder"
+  ]
 }
