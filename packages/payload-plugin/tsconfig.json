@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": {
+      "@blockwright/payload-plugin/client": [
+        "./src/client.tsx"
+      ]
+    }
+  },
+  "include": [
+    "src"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "paths": { "@blockwright/forms/client": ["./src/client.tsx"] }
+  },
+  "include": ["src"]
+}

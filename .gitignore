@@ -12,3 +12,5 @@ apps/*/media
 next-env.d.ts
 test-results
 playwright-report
+release
+*.tgz

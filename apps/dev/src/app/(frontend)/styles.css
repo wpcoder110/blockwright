@@ -1,0 +1,40 @@
+/* Minimal reset. Everything else comes from Blockwright. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--bw-t-text-font-family, system-ui, sans-serif);
+  color: var(--bw-c-text, #1f2937);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.dev-empty {
+  max-width: 640px;
+  margin: 15vh auto;
+  padding: 0 24px;
+}
+.dev-empty code {
+  background: #f1f3f5;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.dev-preview-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 6px 16px;
+  font: 13px/1.4 system-ui, sans-serif;
+  background: #fff3cd;
+  color: #664d03;
+  text-align: center;
+}

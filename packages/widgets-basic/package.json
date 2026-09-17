@@ -1,0 +1,46 @@
+{
+  "name": "@blockwright/widgets-basic",
+  "version": "0.1.0-alpha.0",
+  "description": "Free essential widgets for Blockwright",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "directory": "packages/widgets-basic"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "clean": "node ../../scripts/rm.mjs dist .turbo"
+  },
+  "dependencies": {
+    "@blockwright/core": "workspace:*",
+    "@blockwright/renderer": "workspace:*",
+    "@blockwright/schema": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}

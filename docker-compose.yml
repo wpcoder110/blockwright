@@ -1,0 +1,23 @@
+# Local services for Blockwright development.
+# Postgres: 127.0.0.1:5432  (user/pass: postgres/postgres, db: blockwright)
+# Mailpit:  http://127.0.0.1:8025 (catches every email the form builder sends)
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blockwright
+    ports:
+      - '5432:5432'
+    volumes:
+      - bw_pgdata:/var/lib/postgresql/data
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - '1025:1025'
+      - '8025:8025'
+volumes:
+  bw_pgdata:

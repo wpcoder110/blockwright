@@ -1,0 +1,35 @@
+{
+  "name": "@blockwright/core",
+  "version": "0.1.0-alpha.0",
+  "description": "Widget registry, controls, CSS compiler, globals and dynamic tags for Blockwright",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "directory": "packages/core"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "clean": "node ../../scripts/rm.mjs dist .turbo"
+  },
+  "dependencies": {
+    "@blockwright/schema": "workspace:*"
+  }
+}

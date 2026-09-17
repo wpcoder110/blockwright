@@ -1,0 +1,37 @@
+{
+  "name": "blockwright-monorepo",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "build": "turbo run build --filter=./packages/*",
+    "build:all": "turbo run build",
+    "dev": "turbo run dev --filter=dev... --concurrency=20",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && node scripts/rm.mjs node_modules",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "seed": "pnpm --filter dev seed",
+    "format": "prettier --write .",
+    "pack:local": "pnpm build && node scripts/pack-local.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.9",
+    "prettier": "^3.4.2",
+    "tsup": "8.5.1",
+    "turbo": "2.10.13",
+    "typescript": "5.9.3",
+    "vitest": "4.0.18"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "unrs-resolver"
+    ]
+  }
+}

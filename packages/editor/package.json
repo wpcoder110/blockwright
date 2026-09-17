@@ -1,0 +1,49 @@
+{
+  "name": "@blockwright/editor",
+  "version": "0.1.0-alpha.0",
+  "description": "Visual drag-and-drop editor for Blockwright",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "directory": "packages/editor"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .turbo"
+  },
+  "dependencies": {
+    "@blockwright/core": "workspace:*",
+    "@blockwright/forms": "workspace:*",
+    "@blockwright/renderer": "workspace:*",
+    "@blockwright/schema": "workspace:*",
+    "@blockwright/widgets-basic": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
+  }
+}

@@ -1,0 +1,99 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    name: Build, typecheck and unit tests (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm test
+      - name: Pack for local install
+        run: node scripts/pack-local.mjs
+
+  e2e:
+    name: End-to-end (Payload + Postgres + Playwright)
+    runs-on: ubuntu-latest
+    needs: checks
+    permissions:
+      contents: read
+      pull-requests: write
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: blockwright
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/blockwright
+      PAYLOAD_SECRET: ci-secret-not-for-production-use-only
+      NEXT_PUBLIC_SERVER_URL: http://localhost:3000
+      FORMS_EMAIL_TO: owner@blockwright.local
+      FORMS_RATE_LIMIT: 100
+      SEED_ADMIN_EMAIL: e2e@blockwright.local
+      SEED_ADMIN_PASSWORD: e2e-password-123
+      CI: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Seed demo content (also creates the schema)
+        run: pnpm build && pnpm seed
+      - name: Build the dev app
+        run: pnpm --filter dev build
+      - name: Install Playwright
+        run: pnpm --filter dev exec playwright install --with-deps chromium
+      - name: Run end-to-end tests
+        shell: bash
+        env:
+          FORCE_COLOR: '0'
+        run: |
+          set -o pipefail
+          pnpm --filter dev exec playwright test --reporter=list,html 2>&1 | tee e2e-output.txt
+      - name: Comment failures on the pull request
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const out = fs.existsSync('e2e-output.txt') ? fs.readFileSync('e2e-output.txt', 'utf8') : 'No test output was captured.'
+            const body = '### End-to-end tests failed\n\n```\n' + out.slice(-60000) + '\n```'
+            await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body })
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: apps/dev/playwright-report
+          retention-days: 7
