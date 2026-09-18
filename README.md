@@ -1,5 +1,8 @@
 # Blockwright
 
+[![npm](https://img.shields.io/npm/v/blockwright)](https://www.npmjs.com/package/blockwright) [![licence](https://img.shields.io/npm/l/blockwright)](LICENSE)
+
+
 Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build pages, headers, footers and forms from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
 
 > **Status: 0.1.0, early but working.** The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
