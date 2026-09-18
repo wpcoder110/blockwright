@@ -159,6 +159,11 @@ function Form({ settings, element, ctx }: RenderProps) {
     >
       <input type="hidden" name="_bw_ref" value={ref} />
       <input type="hidden" name="_bw_return" value={ctx.request?.path ?? ''} />
+      {multi ? (
+        <noscript>
+          <style>{`#${anchor} .bw-step{display:block!important}#${anchor} .bw-step-nav .bw-step-next,#${anchor} .bw-step-nav .bw-step-prev,#${anchor} .bw-steps,#${anchor} .bw-steps-progress{display:none!important}`}</style>
+        </noscript>
+      ) : null}
       {indicator}
       {body}
       <div className="bw-form-message" role="status" aria-live="polite" data-state={status || undefined}>

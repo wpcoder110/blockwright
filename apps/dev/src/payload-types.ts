@@ -187,6 +187,7 @@ export interface Media {
  */
 export interface User {
   id: number;
+  roles?: ('admin' | 'customer')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -367,7 +368,7 @@ export interface BwMenu {
   createdAt: string;
 }
 /**
- * Build your own widgets from fields and an HTML template. They appear in the editor under their category.
+ * Build your own widgets from fields and an HTML template. They appear in the editor under their category. Because they can contain raw HTML, only users allowed to post unfiltered HTML (the admin role by default) can create or edit them.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "bw-widgets".
@@ -679,6 +680,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

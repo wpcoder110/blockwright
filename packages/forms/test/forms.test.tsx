@@ -279,3 +279,34 @@ describe('email notifications', () => {
     expect(res.actionLog[0]!.message).toBe('Broken: no valid recipient')
   })
 })
+
+describe('multi-step first paint', () => {
+  it('collapses steps before JavaScript runs and reveals them without it', async () => {
+    const registry2 = createRegistry([form])
+    const c: RenderContext = { registry: registry2, kit: DEFAULT_KIT, mode: 'live', request: { path: '/contact', searchParams: {} } }
+    const layout = validateLayout([
+      {
+        id: 'stp0001',
+        elType: 'widget',
+        widgetType: 'form',
+        settings: {
+          form_fields: [
+            { custom_id: 's1', field_type: 'step', field_label: 'One' },
+            { custom_id: 'a', field_type: 'text', field_label: 'A' },
+            { custom_id: 's2', field_type: 'step', field_label: 'Two' },
+            { custom_id: 'b', field_type: 'text', field_label: 'B' },
+          ],
+        },
+      },
+    ]).data!
+    const built = await buildLayout(layout, c)
+    const html = renderToStaticMarkup(<RenderElements items={built.prepared} ctx={c} />)
+    // only the first step carries is-active, and the base CSS hides the rest immediately
+    expect(html).toContain('class="bw-step is-active" data-step="0"')
+    expect(html).toContain('class="bw-step" data-step="1"')
+    expect(built.compiled.base.form).toContain('.bw-form .bw-step:not(.is-active){display:none}')
+    // visitors without JavaScript see every step instead of a dead end
+    expect(html).toContain('<noscript>')
+    expect(html).toContain('.bw-step{display:block!important}')
+  })
+})

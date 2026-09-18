@@ -55,7 +55,8 @@ export const FORM_CSS =
   '.bw-form .bw-step-prev{background-color:transparent;color:inherit;box-shadow:inset 0 0 0 1px currentColor}' +
   '.bw-step-nav{display:flex;gap:10px;flex:0 0 100%;justify-content:space-between;margin-top:var(--bw-row-gap)}' +
   '.bw-step-nav .bw-step-next,.bw-step-nav .bw-form-submit{margin-inline-start:auto;width:auto}' +
-  '.bw-form[data-enhanced] .bw-step:not(.is-active){display:none}' +
+  // steps are collapsed from the first paint; without JavaScript the <noscript> rule below shows them all
+  '.bw-form .bw-step:not(.is-active){display:none}' +
   '.bw-steps{display:flex;gap:10px;list-style:none;margin:0 0 20px;padding:0}' +
   '.bw-step-indicator{display:flex;align-items:center;gap:8px;flex:1;color:var(--bw-step-inactive);font-size:.9em;font-weight:500}' +
   '.bw-step-indicator.is-active{color:var(--bw-step-active)}.bw-step-indicator.is-done{color:var(--bw-step-done)}' +
