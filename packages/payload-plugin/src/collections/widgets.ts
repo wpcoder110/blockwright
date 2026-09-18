@@ -38,7 +38,8 @@ export function widgetsCollection(rt: BlockwrightRuntime): CollectionConfig {
       group: adminGroup,
       useAsTitle: 'title',
       defaultColumns: ['title', 'type', 'category', 'enabled', 'updatedAt'],
-      description: 'Build your own widgets from fields and an HTML template. They appear in the editor under their category.',
+      description:
+        'Build your own widgets from fields and an HTML template. They appear in the editor under their category. Because they can contain raw HTML, only users allowed to post unfiltered HTML (the admin role by default) can create or edit them.',
     },
     access: {
       read: ({ req }) => !!req.user,

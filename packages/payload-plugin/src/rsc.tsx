@@ -484,6 +484,9 @@ export async function BlockwrightOverviewView({ initPageResult }: EditorViewProp
     options.mediaCollection ? isCollectionPublic(payload, options.mediaCollection) : Promise.resolve(true),
   ])
   const layouts = await Promise.all(options.collections.map(async (slug) => ({ slug, total: await count(slug), public: !!options.collectionConfig[slug]?.public })))
+  const user = req!.user as ({ email?: string; roles?: unknown } & Record<string, unknown>) | null
+  const canUnfiltered = options.canUseUnfilteredHtml({ user, payload } as never)
+  const roles = Array.isArray(user?.roles) ? (user!.roles as string[]) : null
 
   const section: React.CSSProperties = { marginBottom: 'calc(var(--base, 20px) * 1.6)' }
   const grid: React.CSSProperties = { display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', listStyle: 'none', padding: 0, margin: 0 }
@@ -557,6 +560,32 @@ export async function BlockwrightOverviewView({ initPageResult }: EditorViewProp
             <span>{link(`${admin}/globals/${options.kitSlug}`, 'Colors, fonts and layout')}</span>
           </li>
         </ul>
+      </section>
+
+      <section style={section}>
+        <h2 style={{ fontSize: 16 }}>Your account</h2>
+        <div style={{ ...card, gap: 6 }}>
+          <span>
+            Signed in as <strong>{user?.email ?? 'unknown'}</strong>
+            {roles ? (
+              <>
+                {' '}
+                with {roles.length === 1 ? 'the role' : 'the roles'} <code>{roles.join(', ')}</code>
+              </>
+            ) : null}
+            .
+          </span>
+          <span>
+            Custom widgets, Custom HTML and custom CSS: <strong>{canUnfiltered ? 'allowed' : 'not allowed'}</strong>
+          </span>
+          {!canUnfiltered ? (
+            <span style={{ color: 'var(--theme-elevation-600)', fontSize: 13 }}>
+              These can run scripts, so they are limited to users with the <code>admin</code> role. Without it the{' '}
+              <strong>Create new</strong> button on Custom widgets is hidden. Give your account the role, or set{' '}
+              <code>canUseUnfilteredHtml</code> in the plugin options to decide for yourself.
+            </span>
+          ) : null}
+        </div>
       </section>
 
       <section style={section}>

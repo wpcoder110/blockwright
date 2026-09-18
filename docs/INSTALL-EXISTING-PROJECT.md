@@ -104,6 +104,38 @@ The template's test email adapter prints emails in the terminal. Until you set a
 
 Then continue with the checklist in [`TESTING.md`](TESTING.md).
 
+## Using it with @payloadcms/plugin-ecommerce
+
+Install the version that matches your Payload version exactly (`npm ls payload`), and turn on products:
+
+```powershell
+npm install @payloadcms/plugin-ecommerce@3.84.1
+```
+
+```ts
+ecommercePlugin({
+  products: true, // without this, Payload fails with "invalid relationship 'products'"
+  access: { /* your rules */ },
+  customers: { slug: 'users' },
+})
+```
+
+A full working example, including a roles-based users collection and an admin bootstrap, is in
+[`examples/existing-project/payload.config.ecommerce.example.ts`](../examples/existing-project/payload.config.ecommerce.example.ts).
+
+## Why is my site slow in development?
+
+`npm run dev` compiles each route the first time you open it, so the first hit can take 10–20 seconds while later
+ones take a few hundred milliseconds. Measure real speed with a production build:
+
+```powershell
+npm run build
+npm run start
+```
+
+The demo site renders a page in about 30 ms that way. If every request stays slow in production, check the terminal for
+repeated errors (a 403 on media, for example, makes Next.js retry the image optimiser on every render).
+
 ## Updating Blockwright
 
 ```powershell

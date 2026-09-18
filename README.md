@@ -135,6 +135,7 @@ Create a Postgres database called `blockwright` and put its connection string in
 | Admin shows an import map error | Run `pnpm --filter dev generate:importmap`. |
 | Images show in the admin but not on the site ("The requested resource isn't a valid image") | Your upload collection is readable only by logged-in users, which is Payload's default. Add `access: { read: () => true }` to it. Blockwright warns about this on the dashboard. |
 | Images do not load in Next.js | Payload adds a `?<updatedAt>` cache tag to upload URLs; Blockwright strips it for the image optimiser. If you use a storage adapter with a different domain, add it to `images.remotePatterns` in `next.config.ts`. |
+| No **Create new** button on Custom widgets, or no Products button with the ecommerce plugin | Your account needs the `admin` role. See [`docs/PERMISSIONS.md`](docs/PERMISSIONS.md). |
 | Home page shows "Page not found" | Run `pnpm seed`, or create a page with the slug `home` and publish it. |
 | "Too many submissions" while testing forms | Raise `FORMS_RATE_LIMIT` in `apps/dev/.env` (default 10 per minute). |
 
@@ -269,6 +270,7 @@ docs/
   TESTING.md           Manual test checklist for localhost
   LAYOUT_FORMAT.md     The layout JSON format, for editing layouts by hand
   CUSTOM_WIDGETS.md    Building widgets in the admin
+  PERMISSIONS.md       Who can edit what, and the admin role
   INSTALL-EXISTING-PROJECT.md  Adding Blockwright to your own Payload project (Windows)
 examples/
   existing-project/    Files to copy into an existing Payload project
