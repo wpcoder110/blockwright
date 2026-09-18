@@ -10,8 +10,8 @@ npm always serves the last released version. Work on `main` continues without af
 pnpm release:check                 # build, typecheck, tests, and a local pack
 pnpm version:set 0.1.0-alpha.1     # same version for every package
 git commit -am "chore: release v0.1.0-alpha.1"
-git tag v0.1.0-alpha.1
-git push --follow-tags
+git tag -a v0.1.0-alpha.1 -m "Blockwright v0.1.0-alpha.1"   # annotated, so the tag is pushed
+git push origin main v0.1.0-alpha.1
 ```
 
 The **Release** workflow then builds, typechecks and tests again, verifies the tag matches the package version, and publishes with npm provenance.
