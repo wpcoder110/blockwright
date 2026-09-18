@@ -31,6 +31,8 @@ describe('plugin config', () => {
     ])
     expect(config.admin?.components?.views?.blockwrightEditor?.path).toBe('/blockwright/edit/:collection/:id')
     expect(config.admin?.components?.beforeDashboard).toContain('blockwright/rsc#BlockwrightWelcome')
+    expect(config.admin?.components?.afterNavLinks).toContain('blockwright/rsc#BlockwrightNavLink')
+    expect(config.admin?.components?.views?.blockwrightOverview?.path).toBe('/blockwright')
   })
 
   it('marks collections with a slug field as public and adds a preview URL', () => {

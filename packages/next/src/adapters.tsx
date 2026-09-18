@@ -5,11 +5,24 @@ import type { ImageProps, LinkProps } from '@blockwright/renderer'
 /** next/image with Blockwright's performance defaults. */
 const UNOPTIMIZED = /\.(svg|gif|avif)(\?|$)/i
 
-/** Same-site absolute URLs become paths so Next.js can optimise them without extra config. */
+/**
+ * Prepare an upload URL for next/image.
+ *
+ * Payload returns absolute URLs and, with its `cacheTags` option (on by default),
+ * adds a `?<updatedAt>` cache tag. Next.js only optimises local paths and rejects
+ * local URLs with a query string unless `images.localPatterns` allows one, so
+ * same-site URLs become plain paths here and the cache tag is dropped.
+ */
 export function toLocalSrc(src: string, serverURL?: string | null): string {
-  if (!/^https?:\/\//i.test(src)) return src
-  if (serverURL && src.startsWith(serverURL.replace(/\/$/, ''))) return src.slice(serverURL.replace(/\/$/, '').length) || '/'
-  return src
+  let out = src
+  if (/^https?:\/\//i.test(out)) {
+    const base = serverURL?.replace(/\/$/, '')
+    if (base && out.startsWith(base)) out = out.slice(base.length) || '/'
+    else return out
+  }
+  if (!out.startsWith('/')) return out
+  const q = out.indexOf('?')
+  return q === -1 ? out : out.slice(0, q)
 }
 
 export interface NextImageOptions {

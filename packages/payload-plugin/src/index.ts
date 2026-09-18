@@ -141,10 +141,12 @@ export const blockwrightPlugin = definePlugin<BlockwrightPluginConfig>({
       components: {
         ...incoming.admin?.components,
         beforeDashboard: [...(incoming.admin?.components?.beforeDashboard ?? []), 'blockwright/rsc#BlockwrightWelcome'],
+        afterNavLinks: [...(incoming.admin?.components?.afterNavLinks ?? []), 'blockwright/rsc#BlockwrightNavLink'],
         views: {
           ...incoming.admin?.components?.views,
           blockwrightEditor: { Component: 'blockwright/rsc#BlockwrightEditorView', path: '/blockwright/edit/:collection/:id' },
           blockwrightPrint: { Component: 'blockwright/rsc#BlockwrightPrintView', path: '/blockwright/print/:id' },
+          blockwrightOverview: { Component: 'blockwright/rsc#BlockwrightOverviewView', path: '/blockwright' },
         },
       },
     }

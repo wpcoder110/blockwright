@@ -23,6 +23,19 @@ Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build p
 | Dynamic values | Site name, page title, excerpt, date, any document field, featured image, URL parameters, current user, current date |
 | Import | Layouts and templates exported from Elementor-style JSON (containers and legacy sections/columns) |
 
+### Accessibility
+
+Rendered pages target **WCAG 2.1 level AA**, the standard US ADA guidance points at.
+
+- Semantic markup: landmarks, one `h1`, real lists, `figure`/`figcaption`, `fieldset`/`legend`, and labelled form fields.
+- Form errors are linked to their field with `aria-describedby`, marked `aria-invalid`, and announced politely.
+- Menus work with the keyboard, mark the current page with `aria-current`, and the mobile menu needs no JavaScript.
+- Colour and contrast: the default palette and widget styles meet the 4.5:1 text contrast rule.
+- Motion: entrance animations and transitions are switched off for visitors who prefer reduced motion.
+- Every release runs [axe](https://github.com/dequelabs/axe-core) against the demo pages, the form and the 404 page in CI, on desktop and mobile, and fails on any violation.
+
+Your own content still matters: write meaningful alt text, keep heading levels in order, and use the accessible-name fields on icons, menus and videos.
+
 ### Built for speed and SEO
 
 - **Server-rendered.** Pages render as React Server Components; the only browser JavaScript Blockwright adds is a small enhancer for forms.
@@ -87,11 +100,12 @@ After you log in, the dashboard shows a **Blockwright** panel. If the site is em
 
 1. **Site style** (*Blockwright → Site style*): change the colors or fonts. Every widget that uses a global color or font updates.
 2. **Pages**: open *Home* and click **Edit with Blockwright** in the sidebar. Click any element to edit it, drag widgets from the left panel, switch devices at the top, then **Save draft** or **Publish**.
-3. **Templates**: open *Site header* → **Edit with Blockwright** → the gear icon to set where it appears (entire site, front page, specific pages, exclusions).
-4. **Forms**: open **Request a quote** in the editor, select the form, and open **Email notifications** to change recipients, the HTML message and the send-only-when rules. **Preview email** shows the result.
-5. **Form entries**: every submission appears as a readable table. **Print or save as PDF** uses the *Entry PDF* template, which you can redesign under **Templates**.
-6. **Menus**: edit *Main menu* under **Blockwright → Menus** (links to pages, custom URLs, dropdown items). The header's Nav menu widget shows it; choose another menu in the widget's settings.
-7. **Custom widgets**: create one under **Blockwright → Custom widgets**; it appears in the editor's widget panel.
+3. **Blockwright** in the sidebar: an overview of where everything lives, which widgets are available, and how to pause or remove the plugin.
+4. **Templates**: open *Site header* → **Edit with Blockwright** → the gear icon to set where it appears (entire site, front page, specific pages, exclusions).
+5. **Forms**: open **Request a quote** in the editor, select the form, and open **Email notifications** to change recipients, the HTML message and the send-only-when rules. **Preview email** shows the result.
+6. **Form entries**: every submission appears as a readable table. **Print or save as PDF** uses the *Entry PDF* template, which you can redesign under **Templates**.
+7. **Menus**: edit *Main menu* under **Blockwright → Menus** (links to pages, custom URLs, dropdown items). The header's Nav menu widget shows it; choose another menu in the widget's settings.
+8. **Custom widgets**: create one under **Blockwright → Custom widgets**; it appears in the editor's widget panel.
 
 ### Editor shortcuts
 
@@ -119,6 +133,7 @@ Create a Postgres database called `blockwright` and put its connection string in
 | Port 5432 already in use | Another Postgres is running. Stop it, or change the port in `docker-compose.yml` and `DATABASE_URL`. |
 | Changes in `packages/*` not showing | `pnpm dev` rebuilds packages on save; if it was stopped, run `pnpm build` again. |
 | Admin shows an import map error | Run `pnpm --filter dev generate:importmap`. |
+| Images do not load in Next.js | Payload adds a `?<updatedAt>` cache tag to upload URLs; Blockwright strips it for the image optimiser. If you use a storage adapter with a different domain, add it to `images.remotePatterns` in `next.config.ts`. |
 | Home page shows "Page not found" | Run `pnpm seed`, or create a page with the slug `home` and publish it. |
 | "Too many submissions" while testing forms | Raise `FORMS_RATE_LIMIT` in `apps/dev/.env` (default 10 per minute). |
 

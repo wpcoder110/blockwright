@@ -4,7 +4,7 @@ const STAR =
 /** Base form CSS. Loaded once per page, only when a form is present. */
 export const FORM_CSS =
   '.bw-form{--bw-col-gap:10px;--bw-row-gap:12px;--bw-label-gap:4px;--bw-danger:#c62828;--bw-ring:color-mix(in srgb,var(--bw-c-accent,#2563eb) 30%,transparent);' +
-  '--bw-rating:#f5a623;--bw-step-inactive:#b8bec8;--bw-step-active:var(--bw-c-accent,#2563eb);--bw-step-done:var(--bw-c-primary,#1d3557);' +
+  '--bw-rating:#f5a623;--bw-rating-empty:#adb5bd;--bw-step-inactive:#6b7280;--bw-step-active:var(--bw-c-accent,#2563eb);--bw-step-done:var(--bw-c-primary,#1d3557);' +
   '--bw-step-size:28px;--bw-btn-justify:stretch;--bw-btn-w:100%;--bw-basis:100%}' +
   '.bw-form [hidden]{display:none!important}' +
   '.bw-form-fields{display:flex;flex-wrap:wrap;column-gap:var(--bw-col-gap);row-gap:var(--bw-row-gap)}' +
@@ -34,7 +34,7 @@ export const FORM_CSS =
   '.bw-rating{display:inline-flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px}' +
   '.bw-rating-item{position:relative;display:inline-flex}' +
   '.bw-rating input{position:absolute;opacity:0;width:1px;height:1px;margin:0}' +
-  '.bw-rating label{display:block;width:28px;height:28px;cursor:pointer;background-color:var(--bw-step-inactive);' +
+  '.bw-rating label{display:block;width:28px;height:28px;cursor:pointer;background-color:var(--bw-rating-empty,#adb5bd);' +
   '-webkit-mask:' + STAR + ' center/contain no-repeat;mask:' + STAR + ' center/contain no-repeat;transition:background-color .1s}' +
   '.bw-rating-item:has(input:checked) label,.bw-rating-item:has(input:checked)~.bw-rating-item label,' +
   '.bw-rating-item:hover label,.bw-rating-item:hover~.bw-rating-item label{background-color:var(--bw-rating)}' +

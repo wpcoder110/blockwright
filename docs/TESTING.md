@@ -9,7 +9,14 @@ Follow the quick start in the [README](../README.md) first (`pnpm db:up`, `pnpm 
 | `pnpm test` | All unit tests pass (schema, core, widgets, forms, plugin) |
 | `pnpm typecheck` | No errors |
 | `pnpm --filter dev build` | Production build finishes |
-| `pnpm --filter dev test:e2e` | Browser tests pass on desktop and mobile (needs `playwright install chromium` once, and a seeded database) |
+| `pnpm --filter dev test:e2e` | Browser tests pass on desktop and mobile, including the axe accessibility checks (WCAG 2.1 AA) (needs `playwright install chromium` once, and a seeded database) |
+
+## 2. Accessibility
+
+- [ ] Tab through the home page: focus is always visible, the header menu is reachable, and the dropdown opens on focus.
+- [ ] Submit the form empty: focus moves to the first field, the error is read out, and it is tied to the field.
+- [ ] Turn on *reduce motion* in your OS: animations and transitions stop.
+- [ ] Run Lighthouse → Accessibility on the home page and the contact page.
 
 ## 2. Front end
 

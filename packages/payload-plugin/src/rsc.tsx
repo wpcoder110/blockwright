@@ -430,3 +430,144 @@ export async function BlockwrightPrintView({ initPageResult, params, searchParam
     </div>
   )
 }
+
+/* ------------------------------------------------------------------ */
+/* Nav link and overview page                                          */
+/* ------------------------------------------------------------------ */
+
+export function BlockwrightNavLink({ payload }: { payload?: BasePayload }) {
+  const admin = payload?.config.routes?.admin ?? '/admin'
+  return (
+    <a href={`${admin}/blockwright`} className="nav__link" style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M12 4v16M3 12h9" />
+      </svg>
+      Blockwright
+    </a>
+  )
+}
+
+const PKG_VERSION = '0.1.0-alpha.0'
+
+export async function BlockwrightOverviewView({ initPageResult }: EditorViewProps) {
+  const req = initPageResult?.req
+  const payload = req?.payload
+  if (!payload) return null
+  const admin = payload.config.routes?.admin ?? '/admin'
+  if (!req?.user) redirect(`${admin}/login?redirect=${encodeURIComponent(`${admin}/blockwright`)}`)
+  const { options } = getBlockwrightRuntime(payload)
+  const registry = await getRegistry(payload).catch(() => getBlockwrightRuntime(payload).registry)
+  const count = async (collection: string) => {
+    try {
+      return (await payload.count({ collection: collection as never, overrideAccess: true })).totalDocs
+    } catch {
+      return 0
+    }
+  }
+  const [templates, entries, menus, widgets] = await Promise.all([
+    count(options.templatesSlug),
+    count(options.submissionsSlug),
+    count(options.menusSlug),
+    count(options.widgetsSlug),
+  ])
+  const layouts = await Promise.all(options.collections.map(async (slug) => ({ slug, total: await count(slug), public: !!options.collectionConfig[slug]?.public })))
+
+  const section: React.CSSProperties = { marginBottom: 'calc(var(--base, 20px) * 1.6)' }
+  const grid: React.CSSProperties = { display: 'grid', gap: 12, gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', listStyle: 'none', padding: 0, margin: 0 }
+  const box: React.CSSProperties = { ...card, gap: 4 }
+  const link = (href: string, label: string) => (
+    <a href={href} style={{ fontWeight: 600 }}>
+      {label}
+    </a>
+  )
+
+  return (
+    <div className="gutter--left gutter--right" style={{ padding: 'var(--base, 20px)', maxWidth: 1080, margin: '0 auto' }}>
+      <header style={{ ...section, display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'baseline' }}>
+        <h1 style={{ margin: 0 }}>Blockwright</h1>
+        <span style={{ color: 'var(--theme-elevation-500)' }}>version {PKG_VERSION}</span>
+        <span style={{ flex: 1 }} />
+        <a className="btn btn--style-secondary btn--size-small" style={{ margin: 0 }} href="https://github.com/wpcoder110/blockwright-alpha" target="_blank" rel="noopener">
+          Documentation
+        </a>
+      </header>
+
+      <section style={section}>
+        <h2 style={{ fontSize: 16 }}>Where things live</h2>
+        <ul style={grid}>
+          <li style={box}>
+            <strong>Pages and layouts</strong>
+            {layouts.length ? (
+              layouts.map((c) => (
+                <span key={c.slug}>
+                  {link(`${admin}/collections/${c.slug}`, c.slug)} · {c.total} {c.total === 1 ? 'document' : 'documents'}
+                  {c.public ? ' · public' : ''}
+                </span>
+              ))
+            ) : (
+              <span style={{ color: 'var(--theme-elevation-600)' }}>No collections enabled yet. Add them to the plugin options.</span>
+            )}
+          </li>
+          <li style={box}>
+            <strong>Templates</strong>
+            <span>{link(`${admin}/collections/${options.templatesSlug}`, `${templates} templates`)}</span>
+            <span style={{ color: 'var(--theme-elevation-600)', fontSize: 13 }}>Headers, footers, 404 and PDF templates.</span>
+          </li>
+          <li style={box}>
+            <strong>Menus</strong>
+            <span>{link(`${admin}/collections/${options.menusSlug}`, `${menus} menus`)}</span>
+            <span style={{ color: 'var(--theme-elevation-600)', fontSize: 13 }}>Used by the Nav menu widget.</span>
+          </li>
+          <li style={box}>
+            <strong>Form entries</strong>
+            <span>{link(`${admin}/collections/${options.submissionsSlug}`, `${entries} entries`)}</span>
+          </li>
+          <li style={box}>
+            <strong>Custom widgets</strong>
+            <span>{link(`${admin}/collections/${options.widgetsSlug}`, `${widgets} custom widgets`)}</span>
+          </li>
+          <li style={box}>
+            <strong>Site style</strong>
+            <span>{link(`${admin}/globals/${options.kitSlug}`, 'Colors, fonts and layout')}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section style={section}>
+        <h2 style={{ fontSize: 16 }}>Widgets available in the editor</h2>
+        <p style={{ margin: '0 0 10px', color: 'var(--theme-elevation-600)' }}>
+          {registry.all().length} widgets, including {widgets} built in the admin.
+        </p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {registry
+            .all()
+            .map((d) => d.title)
+            .sort()
+            .map((title) => (
+              <span key={title} style={{ padding: '2px 10px', borderRadius: 12, background: 'var(--theme-elevation-100)', fontSize: 12 }}>
+                {title}
+              </span>
+            ))}
+        </div>
+      </section>
+
+      <section style={section}>
+        <h2 style={{ fontSize: 16 }}>Turning it off or removing it</h2>
+        <p style={{ margin: '0 0 8px', color: 'var(--theme-elevation-600)' }}>
+          Payload has no plugin screen: plugins are npm packages listed in <code>payload.config.ts</code>, so they are added and removed in code.
+        </p>
+        <ol style={{ margin: 0, paddingLeft: 20, lineHeight: 1.7 }}>
+          <li>
+            Pause it: <code>blockwrightPlugin(&#123; disabled: true &#125;)</code> keeps your content and the collections, but turns off the editor,
+            the endpoints and the admin additions.
+          </li>
+          <li>
+            Remove it: delete the <code>blockwrightPlugin(...)</code> line, run <code>npm uninstall blockwright</code>, then{' '}
+            <code>payload generate:importmap</code>. Its collections stay in the database until you drop them.
+          </li>
+        </ol>
+      </section>
+    </div>
+  )
+}
