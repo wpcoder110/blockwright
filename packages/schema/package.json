@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/schema",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "Element tree, template and condition schemas for Blockwright",
   "license": "MIT",
   "type": "module",

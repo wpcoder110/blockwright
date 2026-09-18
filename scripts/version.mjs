@@ -16,4 +16,8 @@ for (const dir of dirs) {
   pkg.version = version
   writeFileSync(file, `${JSON.stringify(pkg, null, 2)}\n`)
 }
+// keep the version shown on the admin overview page in step
+const rsc = path.join(root, 'packages', 'payload-plugin', 'src', 'rsc.tsx')
+writeFileSync(rsc, readFileSync(rsc, 'utf8').replace(/const PKG_VERSION = '[^']*'/, `const PKG_VERSION = '${version}'`))
+
 console.log(`Set ${dirs.length} packages to ${version}.\nNext:\n  git commit -am "chore: release v${version}"\n  git tag v${version} && git push --follow-tags`)

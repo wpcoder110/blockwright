@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/forms",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "Drag-and-drop form builder widget, validation and submission actions for Blockwright",
   "license": "MIT",
   "type": "module",

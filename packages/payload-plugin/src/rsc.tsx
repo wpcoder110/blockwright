@@ -459,7 +459,7 @@ export function BlockwrightNavLink({ payload }: { payload?: BasePayload }) {
   )
 }
 
-const PKG_VERSION = '0.1.0-alpha.0'
+const PKG_VERSION = '0.1.0'
 
 export async function BlockwrightOverviewView({ initPageResult }: EditorViewProps) {
   const req = initPageResult?.req

@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/core",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "Widget registry, controls, CSS compiler, globals and dynamic tags for Blockwright",
   "license": "MIT",
   "type": "module",

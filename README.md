@@ -2,7 +2,7 @@
 
 Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build pages, headers, footers and forms from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
 
-> **Status: alpha.** The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
+> **Status: 0.1.0, early but working.** The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
 
 ## What you get
 
@@ -165,7 +165,7 @@ Blockwright ships as **one package**, like the official Payload plugins:
 pnpm add blockwright
 ```
 
-It is not on npm yet, so until the first release run `pnpm pack:local` here and install the files from `release/` with `npm install` (see [`docs/RELEASING.md`](docs/RELEASING.md)).
+To try unreleased work from this repository instead, run `pnpm pack:local` and install the files from `release/` (see [`docs/RELEASING.md`](docs/RELEASING.md)).
 
 **1. Register the plugin** in `payload.config.ts`:
 

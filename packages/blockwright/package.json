@@ -1,6 +1,6 @@
 {
   "name": "blockwright",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0",
   "description": "Visual page and theme builder for Payload CMS: drag-and-drop editor, widgets, forms, menus and theme templates",
   "keywords": [
     "payload",
