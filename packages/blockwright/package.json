@@ -1,6 +1,6 @@
 {
   "name": "blockwright",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Visual page and theme builder for Payload CMS: drag-and-drop editor, widgets, form builder, menus, theme and PDF templates. Inspired by Elementor for WordPress, and now you have Blockwright for Payload CMS.",
   "keywords": [
     "payload",

@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/widgets-basic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Built-in widgets for Blockwright, the page builder for Payload CMS",
   "license": "MIT",
   "type": "module",
