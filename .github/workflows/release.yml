@@ -5,6 +5,7 @@ name: Release
 on:
   push:
     tags: ['v*']
+  workflow_dispatch: {}
 
 jobs:
   publish:
@@ -12,6 +13,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -25,13 +27,38 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - name: Check the tag matches the package version
+        if: github.ref_type == 'tag'
         shell: bash
         run: |
           set -e
           TAG="${GITHUB_REF_NAME#v}"
           PKG=$(node -p "require('./packages/blockwright/package.json').version")
           if [ "$TAG" != "$PKG" ]; then echo "Tag $TAG does not match package version $PKG"; exit 1; fi
-      - name: Publish to npm
-        run: pnpm -r --filter "./packages/*" publish --access public --no-git-checks --provenance
+      - name: Check the npm token works
+        shell: bash
+        run: |
+          set -e
+          if [ -z "${NODE_AUTH_TOKEN}" ]; then echo "NPM_TOKEN secret is missing"; exit 1; fi
+          npm whoami --registry=https://registry.npmjs.org/
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish to npm
+        id: publish
+        shell: bash
+        run: |
+          set -o pipefail
+          pnpm -r --filter "./packages/*" publish --access public --no-git-checks 2>&1 | tee publish.log
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Report a failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs')
+            const log = fs.existsSync('publish.log') ? fs.readFileSync('publish.log', 'utf8') : 'The publish step did not run; see the "Check the npm token works" step.'
+            await github.rest.issues.create({
+              ...context.repo,
+              title: `Release ${context.ref.replace('refs/tags/', '')} failed`,
+              body: '```\n' + log.slice(-50000) + '\n```',
+            })
