@@ -5,7 +5,7 @@ import { RenderElements, buildLayout } from '@blockwright/renderer'
 import { findElement, type Element } from '@blockwright/schema'
 import { PrintButton } from '@blockwright/payload-plugin/client'
 import type { BasePayload } from 'payload'
-import { getBlockwrightRuntime, getCustomWidgetSpecs, getRegistry, getSiteInfo } from './runtime'
+import { getBlockwrightRuntime, getCustomWidgetSpecs, getRegistry, getSiteInfo, isCollectionPublic } from './runtime'
 
 const card: React.CSSProperties = {
   border: '1px solid var(--theme-elevation-150)',
@@ -36,11 +36,13 @@ export async function BlockwrightWelcome({ payload, searchParams }: { payload?: 
       return 0
     }
   }
-  const [templates, entries, pages] = await Promise.all([
+  const [templates, entries, pages, mediaPublic] = await Promise.all([
     count(options.templatesSlug),
     count(options.submissionsSlug, { status: { equals: 'new' } }),
     options.collections[0] ? count(options.collections[0]) : Promise.resolve(0),
+    options.mediaCollection ? isCollectionPublic(payload, options.mediaCollection) : Promise.resolve(true),
   ])
+  const mediaWarning = options.mediaCollection && !mediaPublic ? options.mediaCollection : null
   const first = options.collections[0]
   const api = payload.config.routes?.api ?? '/api'
   const demo = searchParams?.bw_demo
@@ -91,6 +93,15 @@ export async function BlockwrightWelcome({ payload, searchParams }: { payload?: 
           </details>
         )}
       </div>
+      {mediaWarning ? (
+        <p
+          role="status"
+          style={{ margin: '0 0 16px', padding: '10px 14px', borderRadius: 4, background: 'var(--theme-warning-50, #fff9db)', border: '1px solid var(--theme-warning-200, #ffe066)' }}
+        >
+          Images will not show for visitors: the <code>{mediaWarning}</code> collection is only readable when logged in. Add{' '}
+          <code>access: {'{'} read: () =&gt; true {'}'}</code> to it.
+        </p>
+      ) : null}
       {demoMessage ? (
         <p role="status" style={{ margin: '0 0 16px', padding: '8px 12px', borderRadius: 4, background: 'var(--theme-elevation-100)' }}>
           {demoMessage}
@@ -465,11 +476,12 @@ export async function BlockwrightOverviewView({ initPageResult }: EditorViewProp
       return 0
     }
   }
-  const [templates, entries, menus, widgets] = await Promise.all([
+  const [templates, entries, menus, widgets, mediaPublic] = await Promise.all([
     count(options.templatesSlug),
     count(options.submissionsSlug),
     count(options.menusSlug),
     count(options.widgetsSlug),
+    options.mediaCollection ? isCollectionPublic(payload, options.mediaCollection) : Promise.resolve(true),
   ])
   const layouts = await Promise.all(options.collections.map(async (slug) => ({ slug, total: await count(slug), public: !!options.collectionConfig[slug]?.public })))
 
@@ -492,6 +504,19 @@ export async function BlockwrightOverviewView({ initPageResult }: EditorViewProp
           Documentation
         </a>
       </header>
+
+      {options.mediaCollection && !mediaPublic ? (
+        <section style={{ ...section, padding: '14px 18px', borderRadius: 'var(--style-radius-m, 6px)', background: 'var(--theme-warning-50, #fff9db)', border: '1px solid var(--theme-warning-200, #ffe066)' }}>
+          <strong>Images will not show on the public site</strong>
+          <p style={{ margin: '6px 0 0' }}>
+            The <code>{options.mediaCollection}</code> collection is only readable by logged-in users, which is Payload&apos;s default. Visitors, and
+            the Next.js image optimiser, get an error instead of the file. Add public read access to that collection:
+          </p>
+          <pre style={{ margin: '10px 0 0', padding: 12, borderRadius: 4, background: 'var(--theme-elevation-100)', overflowX: 'auto' }}>
+            {`export const Media: CollectionConfig = {\n  slug: '${options.mediaCollection}',\n  access: { read: () => true },\n  upload: true,\n  fields: [{ name: 'alt', type: 'text' }],\n}`}
+          </pre>
+        </section>
+      ) : null}
 
       <section style={section}>
         <h2 style={{ fontSize: 16 }}>Where things live</h2>

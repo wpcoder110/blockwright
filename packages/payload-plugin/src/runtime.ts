@@ -166,3 +166,20 @@ export function getMenu(payload: BasePayload, id: string | number): Promise<Menu
     return resolve(doc.items, 1)
   })
 }
+
+/**
+ * Whether an upload collection can be read without logging in. Payload's default
+ * access is logged-in only, which makes images fail for visitors and for the
+ * Next.js image optimiser.
+ */
+export async function isCollectionPublic(payload: BasePayload, slug: string): Promise<boolean> {
+  const collection = (payload.collections as Record<string, { config: { access?: { read?: (args: unknown) => unknown } } }>)[slug]
+  const read = collection?.config?.access?.read
+  if (!read) return false
+  try {
+    const result = await read({ req: { user: null, payload } })
+    return result === true
+  } catch {
+    return false
+  }
+}

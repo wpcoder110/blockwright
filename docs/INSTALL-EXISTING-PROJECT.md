@@ -127,6 +127,8 @@ Always regenerate the import map after updating: new versions can add admin comp
 | `git` or `pnpm` is not recognised | Close and reopen PowerShell after installing. |
 | `ERESOLVE` peer dependency error | Your Payload or Next.js version is older than 3.0 or 15. Share the error so we can check it. |
 | Admin error mentioning `BlockwrightWelcome`, `EditWithBlockwright` or the import map | Run the `generate:importmap` command from step 5 again. |
+| Images do not appear on the site | Add `access: { read: () => true }` to your `media` collection. Payload requires a login by default, so visitors and the image optimiser get an error. |
+| `DATABASE_URL is missing` when running a `payload` command | The CLI reads `.env` from the folder you run it in. Copy `dev\.env` to the project root, or pass the value inline with `cross-env`. |
 | Home page returns 404 | Install the demo content, or create a page with the slug `home` and publish it. |
 | A layout change is not showing | The page must be published. Drafts are only visible in preview. |
 | Old code after updating | Delete `dev\.next` and restart. |

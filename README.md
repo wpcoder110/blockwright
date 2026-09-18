@@ -133,6 +133,7 @@ Create a Postgres database called `blockwright` and put its connection string in
 | Port 5432 already in use | Another Postgres is running. Stop it, or change the port in `docker-compose.yml` and `DATABASE_URL`. |
 | Changes in `packages/*` not showing | `pnpm dev` rebuilds packages on save; if it was stopped, run `pnpm build` again. |
 | Admin shows an import map error | Run `pnpm --filter dev generate:importmap`. |
+| Images show in the admin but not on the site ("The requested resource isn't a valid image") | Your upload collection is readable only by logged-in users, which is Payload's default. Add `access: { read: () => true }` to it. Blockwright warns about this on the dashboard. |
 | Images do not load in Next.js | Payload adds a `?<updatedAt>` cache tag to upload URLs; Blockwright strips it for the image optimiser. If you use a storage adapter with a different domain, add it to `images.remotePatterns` in `next.config.ts`. |
 | Home page shows "Page not found" | Run `pnpm seed`, or create a page with the slug `home` and publish it. |
 | "Too many submissions" while testing forms | Raise `FORMS_RATE_LIMIT` in `apps/dev/.env` (default 10 per minute). |
