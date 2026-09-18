@@ -78,7 +78,7 @@ Groups follow the same pattern with their prefix: `background_*`, `border_*`, `b
 }
 ```
 
-The `settings` attribute is URL-encoded JSON. Every text tag accepts `before`, `after` and `fallback`. `[elementor-tag …]` is also accepted, and common names such as `post-title` map to Blockwright tags.
+The `settings` attribute is URL-encoded JSON. Every text tag accepts `before`, `after` and `fallback`. `[legacy-tag …]` is also accepted, and common names such as `post-title` map to Blockwright tags.
 
 | Tag | Returns | Settings |
 | --- | --- | --- |

@@ -1,5 +1,10 @@
 # Install Blockwright in an existing Payload project (Windows)
 
+> **The quick way:** Blockwright is on npm, so in most projects you only need
+> `npm install blockwright`, the plugin line in `payload.config.ts`, and
+> `payload generate:importmap`. The steps below cover building from source, which you
+> only need for unreleased changes.
+
 This guide adds Blockwright to a project created from the official **Payload plugin template**, the kind with a `dev\` folder containing `payload.config.ts` and `helpers\credentials.ts`. It was tested with that template on Payload 3.84 and Next.js 16. Other Payload 3 projects work the same way; only the file locations differ (see the end of this guide).
 
 Blockwright is not on npm yet, so you build it once from this repository and install the packed files.
@@ -27,19 +32,19 @@ Put it next to your project, not inside it:
 
 ```powershell
 cd C:\Users\dell\projects
-git clone https://github.com/wpcoder110/blockwright-alpha.git
-cd blockwright-alpha
+git clone https://github.com/wpcoder110/blockwright.git
+cd blockwright
 pnpm install
 pnpm pack:local
 ```
 
-The repository is private, so the first `git clone` opens a GitHub sign-in window. `pnpm pack:local` builds everything and writes the `.tgz` files to `blockwright-alpha\release`. Once Blockwright is on npm this step disappears: you will just run `npm install blockwright`.
+`pnpm pack:local` builds everything and writes the `.tgz` files to `blockwright\release`. Once Blockwright is on npm this step disappears: you will just run `npm install blockwright`.
 
 ## 3. Install it into your project
 
 ```powershell
 cd C:\Users\dell\projects\rlt
-npm install (Get-ChildItem ..\blockwright-alpha\release\*.tgz).FullName
+npm install (Get-ChildItem ..\blockwright\release\*.tgz).FullName
 ```
 
 ## 4. Add the example files
@@ -47,7 +52,7 @@ npm install (Get-ChildItem ..\blockwright-alpha\release\*.tgz).FullName
 This copies a **Pages** collection and the front-end routes into your `dev` folder. (`robocopy` is built into Windows and handles the bracketed folder names; ignore its summary table.)
 
 ```powershell
-robocopy ..\blockwright-alpha\examples\existing-project\dev .\dev /E
+robocopy ..\blockwright\examples\existing-project\dev .\dev /E
 ```
 
 It adds:
@@ -139,12 +144,12 @@ repeated errors (a 403 on media, for example, makes Next.js retry the image opti
 ## Updating Blockwright
 
 ```powershell
-cd C:\Users\dell\projects\blockwright-alpha
+cd C:\Users\dell\projects\blockwright
 git pull
 pnpm install
 pnpm pack:local
 cd ..\rlt
-npm install (Get-ChildItem ..\blockwright-alpha\release\*.tgz).FullName
+npm install (Get-ChildItem ..\blockwright\release\*.tgz).FullName
 npx cross-env PAYLOAD_CONFIG_PATH=./dev/payload.config.ts payload generate:importmap
 Remove-Item -Recurse -Force dev\.next
 npm run dev

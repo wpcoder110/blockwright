@@ -1,7 +1,7 @@
 {
   "name": "@blockwright/renderer",
   "version": "0.1.0",
-  "description": "React renderer for Blockwright layouts (Server Components friendly)",
+  "description": "React Server Components renderer for Blockwright layouts",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "url": "git+https://github.com/wpcoder110/blockwright.git",
     "directory": "packages/renderer"
   },
   "scripts": {
@@ -46,8 +46,8 @@
     "@types/react-dom": "19.2.3"
   },
   "author": "Ahmer Hassan (https://redlionstech.com)",
-  "homepage": "https://github.com/wpcoder110/blockwright-alpha#readme",
-  "bugs": "https://github.com/wpcoder110/blockwright-alpha/issues",
+  "homepage": "https://github.com/wpcoder110/blockwright#readme",
+  "bugs": "https://github.com/wpcoder110/blockwright/issues",
   "engines": {
     "node": ">=20.9.0"
   },
@@ -58,7 +58,20 @@
   "keywords": [
     "payload",
     "payload-plugin",
+    "payloadcms",
+    "payload-cms",
+    "cms",
+    "page-builder",
+    "website-builder",
+    "visual-editor",
+    "drag-and-drop",
+    "blocks",
+    "landing-page",
+    "nextjs",
+    "react",
+    "typescript",
     "blockwright",
-    "page builder"
+    "renderer",
+    "react-server-components"
   ]
 }

@@ -270,7 +270,7 @@ function DocumentPanel() {
               Import JSON
             </button>
           </div>
-          <p className="bwe-desc">Export this layout as a file, or import one exported from Blockwright or an Elementor-compatible builder.</p>
+          <p className="bwe-desc">Export this layout as a file, or import one exported from Blockwright or an compatible builder.</p>
         </div>
       </div>
     </aside>

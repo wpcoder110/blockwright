@@ -1,7 +1,7 @@
 {
   "name": "@blockwright/forms",
   "version": "0.1.0",
-  "description": "Drag-and-drop form builder widget, validation and submission actions for Blockwright",
+  "description": "Form builder for Blockwright: fields, conditional logic, multi-step forms and email notifications",
   "license": "MIT",
   "type": "module",
   "sideEffects": [
@@ -38,7 +38,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wpcoder110/blockwright-alpha.git",
+    "url": "git+https://github.com/wpcoder110/blockwright.git",
     "directory": "packages/forms"
   },
   "scripts": {
@@ -63,8 +63,8 @@
     "@types/react-dom": "19.2.3"
   },
   "author": "Ahmer Hassan (https://redlionstech.com)",
-  "homepage": "https://github.com/wpcoder110/blockwright-alpha#readme",
-  "bugs": "https://github.com/wpcoder110/blockwright-alpha/issues",
+  "homepage": "https://github.com/wpcoder110/blockwright#readme",
+  "bugs": "https://github.com/wpcoder110/blockwright/issues",
   "engines": {
     "node": ">=20.9.0"
   },
@@ -75,7 +75,22 @@
   "keywords": [
     "payload",
     "payload-plugin",
+    "payloadcms",
+    "payload-cms",
+    "cms",
+    "page-builder",
+    "website-builder",
+    "visual-editor",
+    "drag-and-drop",
+    "blocks",
+    "landing-page",
+    "nextjs",
+    "react",
+    "typescript",
     "blockwright",
-    "page builder"
+    "form-builder",
+    "forms",
+    "multi-step-form",
+    "notifications"
   ]
 }

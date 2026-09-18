@@ -135,7 +135,7 @@ Images:
 
 ## 6. Import
 
-While logged in, import an Elementor-style export as a draft template:
+While logged in, import an page-builder style export as a draft template:
 
 ```bash
 curl -X POST http://localhost:3000/api/bw/templates/import \

@@ -503,7 +503,7 @@ export async function BlockwrightOverviewView({ initPageResult }: EditorViewProp
         <h1 style={{ margin: 0 }}>Blockwright</h1>
         <span style={{ color: 'var(--theme-elevation-500)' }}>version {PKG_VERSION}</span>
         <span style={{ flex: 1 }} />
-        <a className="btn btn--style-secondary btn--size-small" style={{ margin: 0 }} href="https://github.com/wpcoder110/blockwright-alpha" target="_blank" rel="noopener">
+        <a className="btn btn--style-secondary btn--size-small" style={{ margin: 0 }} href="https://github.com/wpcoder110/blockwright" target="_blank" rel="noopener">
           Documentation
         </a>
       </header>

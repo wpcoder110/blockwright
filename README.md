@@ -5,14 +5,16 @@
 
 Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build pages, headers, footers and forms from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
 
-> **Status: 0.1.0, early but working.** The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
+**Inspired by Elementor for WordPress, and now you have Blockwright for Payload CMS.**
+
+> **Status: 0.1.0, early but working.** Ecommerce widgets and more are coming soon. The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
 
 ## What you get
 
 | Area | Included in this release |
 | --- | --- |
 | Visual editor | Full-screen drag-and-drop editor in the admin: widget panel, Content/Style/Advanced settings, live canvas, desktop/tablet/mobile preview, navigator, undo/redo, keyboard shortcuts, save draft and publish |
-| Library | Saved templates with live previews, "save as template" for any section or page, drag-and-drop JSON import (Blockwright and Elementor-compatible) with a preview, export of the page or the selected element |
+| Library | Saved templates with live previews, "save as template" for any section or page, drag-and-drop JSON import (Blockwright and WordPress page-builder) with a preview, export of the page or the selected element |
 | Structure | Floating, movable page tree (Ctrl+I) with drag-to-reorder |
 | Layout | **Frame**: flexbox or grid, boxed or full width, responsive direction, gaps, wrapping, columns, semantic tags (`section`, `header`, `nav`…) |
 | Navigation | **Menus** collection (links to pages follow slug changes, up to three levels) and a **Nav menu** widget: dropdowns, current-page highlighting, hover effects, and a mobile menu that works without JavaScript |
@@ -24,7 +26,8 @@ Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build p
 | Site style | Global colors and fonts that every widget can reference, container width, breakpoints, custom CSS |
 | Theme templates | Header, footer, 404 and more, shown by display conditions (entire site, front page, specific pages, exclusions) |
 | Dynamic values | Site name, page title, excerpt, date, any document field, featured image, URL parameters, current user, current date |
-| Import | Layouts and templates exported from Elementor-style JSON (containers and legacy sections/columns) |
+| Coming soon | Ecommerce widgets (product grid, single product, cart, checkout), more widgets, and inline text editing on the canvas |
+| Import | Layouts and templates exported from page-builder style JSON (containers and legacy sections/columns) |
 
 ### Accessibility
 
@@ -63,8 +66,8 @@ Measured on the demo home page (production build): about 30 ms server render onc
 
 ```bash
 # 1. Get the code and install
-git clone https://github.com/wpcoder110/blockwright-alpha.git
-cd blockwright-alpha
+git clone https://github.com/wpcoder110/blockwright.git
+cd blockwright
 corepack enable
 pnpm install
 
@@ -281,7 +284,7 @@ examples/
 
 ## Layout format
 
-Layouts are stored as JSON in the same shape as Elementor's container export, so existing templates and HTML-to-JSON converters work. A minimal page:
+Layouts are stored as JSON in the same shape as the container export format used by popular WordPress page builders, so existing templates and HTML-to-JSON converters work. A minimal page:
 
 ```json
 [
@@ -310,8 +313,8 @@ See [`docs/LAYOUT_FORMAT.md`](docs/LAYOUT_FORMAT.md) for every widget's main set
 2. Run `pnpm build && pnpm typecheck && pnpm test` before pushing.
 3. Open a pull request. CI runs the unit tests and the full browser tests against Postgres.
 
-Blockwright uses Elementor's open JSON format for compatibility, but no Elementor code, icons or text. Please keep it that way.
+Blockwright supports the widely used container JSON format so existing templates import, but contains no third-party code, icons or text. Please keep it that way.
 
 ## Licence
 
-[MIT](LICENSE) © Ahmer and Blockwright contributors. "Elementor" is a trademark of its owner; Blockwright is not affiliated with it.
+[MIT](LICENSE) © Ahmer Hassan and Blockwright contributors. Product names mentioned here belong to their owners; Blockwright is not affiliated with them.

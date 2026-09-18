@@ -28,6 +28,6 @@ Render pages in Next.js:
 import { BlockwrightDocument, BlockwrightLocation, findDocumentBySlug, singularTheme } from 'blockwright/next'
 ```
 
-Full documentation: https://github.com/wpcoder110/blockwright-alpha
+Full documentation: https://github.com/wpcoder110/blockwright
 
 MIT © Ahmer Hassan

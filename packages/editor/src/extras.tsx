@@ -670,7 +670,7 @@ function ImportPane({ onInsert, onSaved }: { onInsert: (layout: Element[], label
       >
         {Icon.upload()}
         <strong>Drop a JSON file here, or click to choose</strong>
-        <span>Blockwright exports and Elementor-compatible templates (containers or sections and columns)</span>
+        <span>Blockwright exports and templates from popular WordPress page builders</span>
       </button>
       <input
         ref={fileRef}
