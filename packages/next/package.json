@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "next": "16.3.3",
-    "payload": "3.89.0",
+    "payload": "3.90.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "@types/react": "19.2.14"

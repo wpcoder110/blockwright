@@ -16,16 +16,16 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "3.89.0",
-    "@payloadcms/email-nodemailer": "3.89.0",
-    "@payloadcms/next": "3.89.0",
-    "@payloadcms/richtext-lexical": "3.89.0",
-    "@payloadcms/ui": "3.89.0",
+    "@payloadcms/db-postgres": "3.90.1",
+    "@payloadcms/email-nodemailer": "3.90.1",
+    "@payloadcms/next": "3.90.1",
+    "@payloadcms/richtext-lexical": "3.90.1",
+    "@payloadcms/ui": "3.90.1",
     "blockwright": "workspace:*",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "16.3.3",
-    "payload": "3.89.0",
+    "payload": "3.90.1",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "sharp": "0.35.4"
