@@ -1,11 +1,27 @@
-# Blockwright
+# Blockwright — visual page builder plugin for Payload CMS
 
-[![npm](https://img.shields.io/npm/v/blockwright)](https://www.npmjs.com/package/blockwright) [![licence](https://img.shields.io/npm/l/blockwright)](LICENSE)
+[![npm](https://img.shields.io/npm/v/blockwright)](https://www.npmjs.com/package/blockwright)
+[![Payload CMS plugin](https://img.shields.io/badge/Payload%20CMS-plugin-000000)](https://payloadcms.com)
+[![Payload 3.x](https://img.shields.io/badge/payload-%5E3.0.0-0a0a0a)](https://payloadcms.com)
+[![Next.js](https://img.shields.io/badge/Next.js-15%20%7C%2016-black)](https://nextjs.org)
+[![downloads](https://img.shields.io/npm/dm/blockwright)](https://www.npmjs.com/package/blockwright)
+[![licence](https://img.shields.io/npm/l/blockwright)](LICENSE)
 
-
-Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build pages, headers, footers and forms from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
+**A Payload CMS plugin** that adds a drag-and-drop visual page and theme builder to your admin panel: build pages, headers, footers, menus, forms and shop pages from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
 
 **Inspired by Elementor for WordPress, and now you have Blockwright for Payload CMS.**
+
+```bash
+npm install blockwright
+```
+
+```ts
+import { blockwrightPlugin } from 'blockwright'
+
+export default buildConfig({
+  plugins: [blockwrightPlugin({ collections: { pages: { public: true } } })],
+})
+```
 
 > **Status: 0.1.0, early but working.** Ecommerce widgets and more are coming soon. The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what is coming next.
 
@@ -320,3 +336,9 @@ Blockwright supports the widely used container JSON format so existing templates
 ## Licence
 
 [MIT](LICENSE) © Ahmer Hassan and Blockwright contributors. Product names mentioned here belong to their owners; Blockwright is not affiliated with them.
+
+---
+
+**Keywords:** payload, payload-plugin, payload cms plugin, payloadcms, page builder, website builder, visual editor,
+drag and drop builder, block editor, form builder, theme builder, ecommerce, next.js, react, typescript, headless CMS,
+no-code, landing page builder, elementor alternative for payload.
