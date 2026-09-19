@@ -8,6 +8,7 @@ export const TEMPLATE_TYPES = [
   { label: 'Footer', value: 'footer' },
   { label: 'Single page', value: 'single-page' },
   { label: 'Single post', value: 'single-post' },
+  { label: 'Single product', value: 'product' },
   { label: 'Single (any document)', value: 'single' },
   { label: 'Archive', value: 'archive' },
   { label: 'Search results', value: 'search-results' },

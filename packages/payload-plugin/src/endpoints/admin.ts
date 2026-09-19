@@ -51,7 +51,7 @@ export function importEndpoint(rt: BlockwrightRuntime): Endpoint {
       if (!parsed.success) return Response.json({ message: 'The file could not be imported.', errors: parsed.errors }, { status: 400 })
       const env = parsed.data!
       const target = wrapper.target && rt.options.collections.includes(wrapper.target) ? wrapper.target : rt.options.templatesSlug
-      const knownTypes = ['header', 'footer', 'single', 'single-page', 'single-post', 'archive', 'search-results', 'error-404', 'section', 'page', 'popup', 'pdf']
+      const knownTypes = ['header', 'footer', 'single', 'single-page', 'single-post', 'archive', 'search-results', 'error-404', 'section', 'page', 'popup', 'pdf', 'product']
       const data =
         target === rt.options.templatesSlug
           ? { title: wrapper.title ?? env.title, type: knownTypes.includes(env.type) ? env.type : 'section', layout: env.content, pageSettings: env.page_settings, _status: 'draft' }

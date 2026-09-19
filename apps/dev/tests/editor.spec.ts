@@ -38,7 +38,7 @@ test.describe('visual editor', () => {
 
     await page.locator('.bwe-top button[title="Widgets"]').click()
     const buttons = await canvas.locator('.bw-w-button').count()
-    await page.locator('.bwe-tile', { hasText: 'Button' }).dragTo(canvas.locator('h2.bw-heading').first())
+    await page.getByRole('button', { name: 'Button', exact: true }).dragTo(canvas.locator('h2.bw-heading').first())
     await expect(canvas.locator('.bw-w-button')).toHaveCount(buttons + 1)
 
     await page.getByRole('button', { name: 'Save draft' }).click()

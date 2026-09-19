@@ -22,12 +22,34 @@ export function readPath(doc: unknown, path: string): unknown {
   return cur
 }
 
+/**
+ * Find the price on a document.
+ *
+ * Falls back to the per-currency fields `@payloadcms/plugin-ecommerce` creates
+ * (`priceInUSD`, `priceInPKR` …) when the configured path holds nothing.
+ */
+export function resolveAmount(doc: unknown, o: PriceOptions): { amount: number; currency?: string } {
+  const raw = readPath(doc, o.amountPath)
+  const direct = typeof raw === 'string' ? Number(raw) : typeof raw === 'number' ? raw : NaN
+  if (Number.isFinite(direct)) return { amount: direct }
+  if (doc && typeof doc === 'object') {
+    for (const [key, value] of Object.entries(doc as Record<string, unknown>)) {
+      const match = /^priceIn([A-Z]{3})$/.exec(key)
+      if (match && (typeof value === 'number' || typeof value === 'string')) {
+        const amount = Number(value)
+        if (Number.isFinite(amount)) return { amount, currency: match[1] }
+      }
+    }
+  }
+  return { amount: NaN }
+}
+
 /** Format a stored amount for display. Returns an empty string when there is no price. */
 export function formatPrice(doc: unknown, o: PriceOptions): string {
-  const raw = readPath(doc, o.amountPath)
-  const amount = typeof raw === 'string' ? Number(raw) : typeof raw === 'number' ? raw : NaN
+  const found = resolveAmount(doc, o)
+  const amount = found.amount
   if (!Number.isFinite(amount)) return ''
-  const code = String((o.currencyPath ? readPath(doc, o.currencyPath) : '') || o.currency || 'USD').toUpperCase()
+  const code = String((o.currencyPath ? readPath(doc, o.currencyPath) : '') || found.currency || o.currency || 'USD').toUpperCase()
   const value = o.minorUnits === false ? amount : amount / 100
   try {
     // normalise the non-breaking spaces Intl inserts, so markup and tests stay predictable

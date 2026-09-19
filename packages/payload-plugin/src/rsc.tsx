@@ -5,6 +5,7 @@ import { RenderElements, buildLayout } from '@blockwright/renderer'
 import { findElement, type Element } from '@blockwright/schema'
 import { PrintButton } from '@blockwright/payload-plugin/client'
 import type { BasePayload } from 'payload'
+import { commerceAvailable, commerceDefaults } from './commerce'
 import { getBlockwrightRuntime, getCustomWidgetSpecs, getRegistry, getSiteInfo, isCollectionPublic } from './runtime'
 
 const card: React.CSSProperties = {
@@ -317,6 +318,7 @@ export async function BlockwrightEditorView({ initPageResult, params }: EditorVi
         templatesSlug: options.templatesSlug,
         mediaCollection: options.mediaCollection,
         collections: options.collections,
+        productsSlug: commerceAvailable(payload, options.commerce) ? commerceDefaults(options.commerce).productsSlug : undefined,
         previewUrl,
       }}
       initial={{

@@ -1,6 +1,8 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { ecommercePlugin } from '@payloadcms/plugin-ecommerce'
+import { USD } from '@payloadcms/plugin-ecommerce'
 import { blockwrightPlugin } from 'blockwright'
 import path from 'path'
 import { buildConfig } from 'payload'
@@ -42,6 +44,8 @@ export default buildConfig({
   sharp,
   plugins: [
     blockwrightPlugin({
+      // commerce, so the Blockwright cart and checkout widgets have data to work with
+      commerce: { urlPattern: '/products/{slug}', cartPath: '/cart', checkoutSuccessPath: '/thank-you' },
       // `pages` is public, so the admin shows a "View page" button and Payload's preview
       collections: { pages: { public: true } },
       forms: {
@@ -49,6 +53,31 @@ export default buildConfig({
         defaultFromEmail: process.env.EMAIL_FROM,
         allowedCollections: [],
         rateLimit: { max: Number(process.env.FORMS_RATE_LIMIT || 10), windowMs: 60_000 },
+      },
+    }),
+    ecommercePlugin({
+      // without a currencies config the plugin adds no price fields at all
+      currencies: { supportedCurrencies: [USD], defaultCurrency: 'USD' },
+      products: {
+        productsCollectionOverride: ({ defaultCollection }) => ({
+          ...defaultCollection,
+          admin: { ...defaultCollection.admin, useAsTitle: 'title' },
+          fields: [
+            ...defaultCollection.fields,
+            { name: 'title', type: 'text', required: true },
+            { name: 'slug', type: 'text', required: true, index: true },
+            { name: 'gallery', type: 'array', fields: [{ name: 'image', type: 'upload', relationTo: 'media' }] },
+          ],
+        }),
+      },
+      customers: { slug: 'users' },
+      access: {
+        adminOnlyFieldAccess: ({ req: { user } }) => Boolean(user),
+        adminOrPublishedStatus: ({ req: { user } }) => (user ? true : { _status: { equals: 'published' } }),
+        isAdmin: ({ req: { user } }) => Boolean(user),
+        isAuthenticated: ({ req: { user } }) => Boolean(user),
+        isCustomer: ({ req: { user } }) => Boolean(user),
+        isDocumentOwner: ({ req: { user } }) => Boolean(user),
       },
     }),
   ],

@@ -26,8 +26,8 @@ Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build p
 | Site style | Global colors and fonts that every widget can reference, container width, breakpoints, custom CSS |
 | Theme templates | Header, footer, 404 and more, shown by display conditions (entire site, front page, specific pages, exclusions) |
 | Dynamic values | Site name, page title, excerpt, date, any document field, featured image, URL parameters, current user, current date |
-| Commerce | **Products** grid and **Price** widgets for `@payloadcms/plugin-ecommerce` or any products collection, with field mapping, currency formatting and stock badges |
-| Coming soon | Add to cart, cart and checkout, variant pickers, more widgets, and inline text editing on the canvas |
+| Commerce | **Products**, **Price**, **Add to cart**, **Cart**, **Cart button** and **Checkout** widgets for `@payloadcms/plugin-ecommerce` or any products collection, plus visually edited product templates. See [`docs/COMMERCE.md`](docs/COMMERCE.md) |
+| Coming soon | Card payments, variant pickers, more widgets, and inline text editing on the canvas |
 | Import | Layouts and templates exported from page-builder style JSON (containers and legacy sections/columns) |
 
 ### Accessibility
@@ -273,6 +273,7 @@ packages/
   payload-plugin/      Payload plugin: fields, collections, site style, endpoints, dashboard
   next/                Next.js helpers: document and template rendering, next/image and next/link
 docs/
+  COMMERCE.md          Shop pages, cart, checkout and product templates
   ROADMAP.md           What is shipped and what is next
   TESTING.md           Manual test checklist for localhost
   LAYOUT_FORMAT.md     The layout JSON format, for editing layouts by hand

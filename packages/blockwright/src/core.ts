@@ -1,2 +1,2 @@
 export * from '@blockwright/core'
-export { generateId, validateLayout, parseTemplateEnvelope } from '@blockwright/schema'
+export { generateId, validateLayout, parseTemplateEnvelope, buildTagString } from '@blockwright/schema'

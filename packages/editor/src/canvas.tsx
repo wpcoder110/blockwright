@@ -4,7 +4,7 @@ import { type PreparedElement, type RenderContext, compileCss, kitFonts, kitToCs
 import { RenderElements, googleFontsHref } from '@blockwright/renderer'
 import type { Element } from '@blockwright/schema'
 import { useEditor } from './context'
-import { fetchMenu } from './api'
+import { fetchMenu, fetchSampleDoc } from './api'
 import { SAMPLE_ENTRY } from '@blockwright/forms'
 import { type DropTarget, type Rect, computeDrop } from './dnd'
 import { Icon } from './icons'
@@ -36,12 +36,39 @@ export function Canvas() {
   const edRef = useRef(ed)
   edRef.current = ed
 
+  const isPdf = cfg.collection === cfg.templatesSlug && ed.meta.templateType === 'pdf'
+  // single templates render against a real document so widgets show real content
+  const sampleFrom =
+    cfg.collection === cfg.templatesSlug
+      ? ed.meta.templateType === 'product'
+        ? cfg.productsSlug || 'products'
+        : ed.meta.templateType === 'single-post'
+          ? 'posts'
+          : ed.meta.templateType === 'single-page' || ed.meta.templateType === 'single'
+            ? cfg.collections?.[0]
+            : undefined
+      : undefined
+  const [sample, setSample] = useState<Record<string, unknown> | null>(null)
+  useEffect(() => {
+    if (!sampleFrom) {
+      setSample(null)
+      return
+    }
+    let live = true
+    fetchSampleDoc(cfg, sampleFrom)
+      .then((doc) => live && setSample(doc))
+      .catch(() => live && setSample(null))
+    return () => {
+      live = false
+    }
+  }, [cfg, sampleFrom])
+
   const ctx = useMemo<RenderContext>(
     () => ({
       registry,
       kit,
       mode: 'edit',
-      document: { collection: cfg.collection, id: cfg.id, data: docData },
+      document: sample ? { collection: String(sampleFrom), id: String(sample.id ?? ''), data: sample } : { collection: cfg.collection, id: cfg.id, data: docData },
       owner: { collection: cfg.collection, id: cfg.id },
       site,
       request: { path: '/', searchParams: {} },
@@ -49,9 +76,9 @@ export function Canvas() {
       extra: { entry: SAMPLE_ENTRY },
       services: { menu: (id) => fetchMenu(cfg, id) },
     }),
-    [registry, kit, cfg, docData, site],
+    [registry, kit, cfg, docData, site, sample, sampleFrom],
   )
-  const isPdf = cfg.collection === cfg.templatesSlug && ed.meta.templateType === 'pdf'
+
 
   // resolve dynamic values and compile CSS whenever the layout changes
   useEffect(() => {

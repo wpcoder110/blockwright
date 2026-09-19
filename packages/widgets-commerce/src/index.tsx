@@ -25,6 +25,7 @@ import { BwImage, BwLink } from '@blockwright/renderer'
 import { type MapOptions, type ProductCard, formatPrice, readPath, toCard } from './price'
 
 export * from './price'
+export * from './cart'
 
 const W = '{{WRAPPER}}'
 
@@ -273,7 +274,9 @@ export const COMMERCE_TAGS = [
   }),
 ]
 
-export const commerceElements = [productGrid, productPrice]
+import { cartElements } from './cart'
+
+export const commerceElements = [productGrid, productPrice, ...cartElements]
 
 export function registerCommerceElements(registry: Registry) {
   commerceElements.forEach((d) => registry.register(d))

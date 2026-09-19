@@ -242,6 +242,7 @@ function DocumentPanel() {
                     ['error-404', '404 page'],
                     ['section', 'Section (reusable block)'],
                     ['page', 'Page template'],
+                    ['product', 'Single product'],
                     ['popup', 'Popup'],
                     ['pdf', 'PDF for form entries'],
                   ].map(([v, l]) => (
@@ -251,6 +252,12 @@ function DocumentPanel() {
                   ))}
                 </select>
               </label>
+              {ed.meta.templateType === 'product' ? (
+                <p className="bwe-desc">
+                  This layout is used for every product. Add <strong>Price</strong>, <strong>Add to cart</strong> and dynamic values, and the canvas
+                  fills them from a real product so you can see the result.
+                </p>
+              ) : null}
               {ed.meta.templateType === 'pdf' ? (
                 <p className="bwe-desc">
                   Design how a form entry looks when printed or saved as PDF. Add the <strong>Entry answers</strong> widget, and use the

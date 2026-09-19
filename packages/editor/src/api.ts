@@ -13,6 +13,8 @@ export interface EditorConfig {
   mediaCollection: string | false
   /** Collections with Blockwright layouts (for display conditions). */
   collections: string[]
+  /** Products collection, used to preview product templates. */
+  productsSlug?: string
   /** Public URL of the document, if it has one. */
   previewUrl?: string | null
 }
@@ -125,4 +127,21 @@ export function fetchMenu(cfg: EditorConfig, id: string | number, fresh = false)
     menuCache.set(key, p)
   }
   return p as Promise<never>
+}
+
+const sampleCache = new Map<string, Promise<Record<string, unknown> | null>>()
+
+/** One published document from a collection, used to preview single templates. */
+export function fetchSampleDoc(cfg: EditorConfig, collection: string) {
+  let p = sampleCache.get(collection)
+  if (!p) {
+    p = request<{ docs: Array<Record<string, unknown>> }>(`${cfg.apiRoute}/${collection}?limit=1&depth=2&sort=-createdAt`)
+      .then((r) => r.docs[0] ?? null)
+      .catch(() => {
+        sampleCache.delete(collection)
+        return null
+      })
+    sampleCache.set(collection, p)
+  }
+  return p
 }

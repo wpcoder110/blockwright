@@ -7,6 +7,7 @@ import { menusCollection } from './collections/menus'
 import { submissionsCollection } from './collections/submissions'
 import { templatesCollection } from './collections/templates'
 import { widgetsCollection } from './collections/widgets'
+import { cartEndpoint, cartUpdateEndpoint, checkoutEndpoint } from './commerce'
 import { demoEndpoint } from './demo'
 import { importEndpoint, menuEndpoint, registryEndpoint } from './endpoints/admin'
 import { printEntryEndpoint } from './endpoints/print'
@@ -32,6 +33,7 @@ export { cleanHtml, sanitizeLayout } from './sanitize'
 export { editButtonField, layoutField, LAYOUT_FIELD } from './layoutField'
 export { TEMPLATE_TYPES } from './collections/templates'
 export { MENUS_SLUG } from './collections/menus'
+export { CART_COOKIE, commerceAvailable, commerceDefaults, toCartView, type CartLine, type CartView } from './commerce'
 export { installDemoContent, type DemoResult } from './demo'
 
 /** Apply a `fields` override from the plugin options. */
@@ -71,6 +73,7 @@ function resolveOptions(opts: BlockwrightPluginConfig, config: Config): Resolved
     mediaCollection: opts.uploadCollection ?? (hasMedia ? 'media' : false),
     adminGroup: opts.adminGroup ?? 'Blockwright',
     forms: opts.forms ?? {},
+    commerce: opts.commerce,
     onChange: opts.onChange,
     previewUrl: ({ collection, doc }) => {
       const cfg = collectionConfig[collection]
@@ -136,6 +139,9 @@ export const blockwrightPlugin = definePlugin<BlockwrightPluginConfig>({
       demoEndpoint(rt),
       printEntryEndpoint(rt),
       menuEndpoint(),
+      cartEndpoint(rt),
+      cartUpdateEndpoint(rt),
+      checkoutEndpoint(rt),
     ]
     config.admin = {
       ...incoming.admin,

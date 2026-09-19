@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { Config } from 'payload'
-import { blockwrightPlugin, kitFromDoc, sanitizeLayout, getBlockwrightRuntime } from '../src'
+import { blockwrightPlugin, kitFromDoc, sanitizeLayout, getBlockwrightRuntime, commerceDefaults, toCartView } from '../src'
 
 const baseConfig = {
   admin: { user: 'users' },
@@ -28,6 +28,9 @@ describe('plugin config', () => {
       'post /bw/demo',
       'get /bw/entries/:id/print',
       'get /bw/menus/:id',
+      'get /bw/cart',
+      'post /bw/cart',
+      'post /bw/checkout',
     ])
     expect(config.admin?.components?.views?.blockwrightEditor?.path).toBe('/blockwright/edit/:collection/:id')
     expect(config.admin?.components?.beforeDashboard).toContain('blockwright/rsc#BlockwrightWelcome')
@@ -141,5 +144,37 @@ describe('kitFromDoc', () => {
     expect(kit.breakpoints.laptop).toMatchObject({ value: 1440, enabled: true })
     expect(kit.breakpoints.widescreen.enabled).toBe(false)
     expect(kit.fontProvider).toBe('none')
+  })
+})
+
+describe('cart', () => {
+  const options = commerceDefaults({ urlPattern: '/shop/{slug}' })
+
+  it('reads per-currency price fields the ecommerce plugin creates', () => {
+    const cart = {
+      items: [
+        { id: 'a', quantity: 2, product: { id: 1, title: 'Bedsheet', slug: 'bedsheet', priceInUSD: 8500, gallery: [{ image: { url: '/a.jpg', alt: 'A' } }] } },
+        { id: 'b', quantity: 1, product: { id: 2, title: 'Cushion', slug: 'cushion', priceInUSD: 2200 } },
+      ],
+    }
+    const view = toCartView(cart, options)
+    expect(view.count).toBe(3)
+    expect(view.subtotal).toBe(19200)
+    expect(view.currency).toBe('USD')
+    expect(view.lines[0]).toMatchObject({ title: 'Bedsheet', url: '/shop/bedsheet', quantity: 2, lineTotal: 17000 })
+    expect(view.lines[0]!.image).toMatchObject({ url: '/a.jpg' })
+  })
+
+  it('treats a missing or emptied cart as empty', () => {
+    expect(toCartView(null, options)).toMatchObject({ empty: true, count: 0, subtotal: 0 })
+    expect(toCartView({ items: [] }, options).empty).toBe(true)
+    // items whose product was deleted are skipped rather than breaking the cart
+    expect(toCartView({ items: [{ id: 'x', quantity: 1, product: null }] }, options).empty).toBe(true)
+  })
+
+  it('uses the configured paths when a store has its own shape', () => {
+    const custom = commerceDefaults({ amountPath: 'price', titlePath: 'name', urlPattern: '/p/{id}' })
+    const view = toCartView({ items: [{ id: 'a', quantity: 2, product: { id: 7, name: 'Throw', price: 1000 } }] }, custom)
+    expect(view.lines[0]).toMatchObject({ title: 'Throw', url: '/p/7', lineTotal: 2000 })
   })
 })

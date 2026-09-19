@@ -38,6 +38,9 @@ importers:
       '@payloadcms/next':
         specifier: 3.90.1
         version: 3.90.1(@types/react@19.2.14)(graphql@16.14.2)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3)
+      '@payloadcms/plugin-ecommerce':
+        specifier: 3.90.1
+        version: 3.90.1(@types/react@19.2.14)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3)
       '@payloadcms/richtext-lexical':
         specifier: 3.90.1
         version: 3.90.1(@faceless-ui/modal@3.0.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@faceless-ui/scroll-info@2.0.0(react-dom@19.2.6(react@19.2.6))(react@19.2.6))(@payloadcms/next@3.90.1(@types/react@19.2.14)(graphql@16.14.2)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3))(@types/react@19.2.14)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3)(yjs@13.6.32)
@@ -1600,6 +1603,13 @@ packages:
       graphql: ^16.8.1
       next: '>=15.2.9 <15.3.0 || >=15.3.9 <15.4.0 || >=15.4.11 <15.5.0 || >=16.3.3 <17.0.0'
       payload: 3.90.1
+
+  '@payloadcms/plugin-ecommerce@3.90.1':
+    resolution: {integrity: sha512-yLHblWrnYs+M7r8LyoP7bo42nJ38Cb26kL5QMqZVlKLwcgnSTE+qjNSccs8dS4J4kpPDfW8eZDaHqsWYmbIKeA==}
+    peerDependencies:
+      payload: 3.90.1
+      react: ^19.0.1 || ^19.1.2 || ^19.2.1
+      react-dom: ^19.0.1 || ^19.1.2 || ^19.2.1
 
   '@payloadcms/richtext-lexical@3.90.1':
     resolution: {integrity: sha512-j7jVEFk9eEt79xi6YA3RtCFitr4asSxe4Yv/nbBXQKWDFfZSMzF95AzC2heWDQLmmSFYOVw41lib91uZI79exw==}
@@ -4492,6 +4502,21 @@ snapshots:
       - monaco-editor
       - react
       - react-dom
+      - supports-color
+      - typescript
+
+  '@payloadcms/plugin-ecommerce@3.90.1(@types/react@19.2.14)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3)':
+    dependencies:
+      '@payloadcms/translations': 3.90.1
+      '@payloadcms/ui': 3.90.1(@types/react@19.2.14)(monaco-editor@0.56.0)(next@16.3.3(@playwright/test@1.58.2)(@types/node@22.19.9)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(sass@1.77.4))(payload@3.90.1(graphql@16.14.2)(typescript@5.9.3))(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@5.9.3)
+      payload: 3.90.1(graphql@16.14.2)(typescript@5.9.3)
+      qs-esm: 8.0.1
+      react: 19.2.6
+      react-dom: 19.2.6(react@19.2.6)
+    transitivePeerDependencies:
+      - '@types/react'
+      - monaco-editor
+      - next
       - supports-color
       - typescript
 

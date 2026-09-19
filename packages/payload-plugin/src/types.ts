@@ -20,7 +20,33 @@ export interface BlockwrightCollectionConfig {
   field?: string
 }
 
+export interface CommerceOptions {
+  /** Collection slugs from your ecommerce setup. */
+  productsSlug?: string
+  variantsSlug?: string
+  cartsSlug?: string
+  ordersSlug?: string
+  /** Where to read product details from. Dotted paths. */
+  titlePath?: string
+  imagePath?: string
+  amountPath?: string
+  currencyPath?: string
+  currency?: string
+  /** Public URL of a product, e.g. `/products/{slug}`. */
+  urlPattern?: string
+  /** Page holding the Cart widget. Default: `/cart`. */
+  cartPath?: string
+  /** Where checkout sends the visitor. Default: `/thank-you`. */
+  checkoutSuccessPath?: string
+  /** Status for new orders. Default: `processing`. */
+  orderStatus?: string
+  /** Called after an order is created (emails, payment links, stock). */
+  onOrder?: (args: { order: Record<string, unknown>; cart: unknown; req: unknown }) => void | Promise<void>
+}
+
 export type BlockwrightPluginConfig = {
+  /** Cart and checkout settings for `@payloadcms/plugin-ecommerce`. */
+  commerce?: CommerceOptions
   /**
    * Collections that get a Blockwright layout, either as slugs or with options each.
    * Default: `['pages']` when that collection exists.
@@ -79,6 +105,7 @@ export interface ResolvedOptions {
   forms: NonNullable<BlockwrightPluginConfig['forms']>
   canUseUnfilteredHtml: (req: PayloadRequest) => boolean
   onChange?: BlockwrightPluginConfig['onChange']
+  commerce?: CommerceOptions
   previewUrl?: (args: { collection: string; doc: Record<string, unknown> }) => string | null
 }
 
