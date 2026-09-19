@@ -7,7 +7,7 @@ Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build p
 
 **Inspired by Elementor for WordPress, and now you have Blockwright for Payload CMS.**
 
-> **Status: 0.1.0, early but working.** Ecommerce widgets and more are coming soon. The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/PROJECT_PLAN.md`](docs/PROJECT_PLAN.md) for the roadmap.
+> **Status: 0.1.0, early but working.** Ecommerce widgets and more are coming soon. The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what is coming next.
 
 ## What you get
 
@@ -272,7 +272,7 @@ packages/
   payload-plugin/      Payload plugin: fields, collections, site style, endpoints, dashboard
   next/                Next.js helpers: document and template rendering, next/image and next/link
 docs/
-  PROJECT_PLAN.md      Architecture and roadmap
+  ROADMAP.md           What is shipped and what is next
   TESTING.md           Manual test checklist for localhost
   LAYOUT_FORMAT.md     The layout JSON format, for editing layouts by hand
   CUSTOM_WIDGETS.md    Building widgets in the admin
