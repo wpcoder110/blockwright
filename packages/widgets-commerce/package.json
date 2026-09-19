@@ -1,7 +1,7 @@
 {
-  "name": "@blockwright/editor",
+  "name": "@blockwright/widgets-commerce",
   "version": "0.1.1",
-  "description": "Visual drag-and-drop editor for Blockwright, the page builder for Payload CMS",
+  "description": "Commerce widgets for Blockwright: product grid and price, working with any products collection",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -22,7 +22,7 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wpcoder110/blockwright.git",
-    "directory": "packages/editor"
+    "directory": "packages/widgets-commerce"
   },
   "scripts": {
     "build": "tsup",
@@ -33,21 +33,16 @@
   },
   "dependencies": {
     "@blockwright/core": "workspace:*",
-    "@blockwright/forms": "workspace:*",
     "@blockwright/renderer": "workspace:*",
-    "@blockwright/schema": "workspace:*",
-    "@blockwright/widgets-basic": "workspace:*",
-    "@blockwright/widgets-commerce": "workspace:*"
+    "@blockwright/schema": "workspace:*"
   },
   "peerDependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "react": "19.2.6",
     "react-dom": "19.2.6",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3"
+    "@types/react": "19.2.14"
   },
   "author": "Ahmer Hassan (https://redlionstech.com)",
   "homepage": "https://github.com/wpcoder110/blockwright#readme",
@@ -63,18 +58,9 @@
     "payload",
     "payload-plugin",
     "payloadcms",
-    "payload-cms",
-    "cms",
+    "ecommerce",
+    "products",
     "page-builder",
-    "website-builder",
-    "visual-editor",
-    "drag-and-drop",
-    "blocks",
-    "landing-page",
-    "nextjs",
-    "react",
-    "typescript",
-    "blockwright",
-    "canvas"
+    "blockwright"
   ]
 }

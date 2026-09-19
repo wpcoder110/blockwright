@@ -1,6 +1,7 @@
 import { CORE_TAGS, createRegistry } from '@blockwright/core'
 import { ENTRY_TAGS, formElements } from '@blockwright/forms'
 import { basicElements } from '@blockwright/widgets-basic'
+import { COMMERCE_TAGS, commerceElements } from '@blockwright/widgets-commerce'
 import { type CollectionConfig, type Config, type Field, type PayloadRequest, definePlugin } from 'payload'
 import { menusCollection } from './collections/menus'
 import { submissionsCollection } from './collections/submissions'
@@ -100,8 +101,8 @@ export const blockwrightPlugin = definePlugin<BlockwrightPluginConfig>({
   plugin: ({ config: incoming, plugins: _plugins, ...opts }) => {
     const options = resolveOptions(opts as BlockwrightPluginConfig, incoming)
     const registry = createRegistry(
-      [...basicElements, ...formElements, ...((opts as BlockwrightPluginConfig).elements ?? [])],
-      [...CORE_TAGS, ...ENTRY_TAGS, ...((opts as BlockwrightPluginConfig).tags ?? [])],
+      [...basicElements, ...formElements, ...commerceElements, ...((opts as BlockwrightPluginConfig).elements ?? [])],
+      [...CORE_TAGS, ...ENTRY_TAGS, ...COMMERCE_TAGS, ...((opts as BlockwrightPluginConfig).tags ?? [])],
     )
     const rt: BlockwrightRuntime = { registry, options }
     const o = opts as BlockwrightPluginConfig

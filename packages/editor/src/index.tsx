@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { CORE_TAGS, type Device, type Kit, createRegistry } from '@blockwright/core'
 import { ENTRY_TAGS, formElements } from '@blockwright/forms'
+import { COMMERCE_TAGS, commerceElements } from '@blockwright/widgets-commerce'
 import { type Element, validateLayout } from '@blockwright/schema'
 import { basicElements } from '@blockwright/widgets-basic'
 import { type CustomWidgetSpec, createCustomWidget } from '@blockwright/renderer'
@@ -53,8 +54,8 @@ export function BlockwrightEditor({ config, initial, kit, site = {}, customWidge
         return []
       }
     })
-    const base = [...basicElements, ...formElements]
-    return createRegistry([...base, ...custom.filter((c) => !base.some((b) => b.type === c.type))], [...CORE_TAGS, ...ENTRY_TAGS])
+    const base = [...basicElements, ...formElements, ...commerceElements]
+    return createRegistry([...base, ...custom.filter((c) => !base.some((b) => b.type === c.type))], [...CORE_TAGS, ...ENTRY_TAGS, ...COMMERCE_TAGS])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   const [history, setHistory] = useState<History>(() => ({ past: [], present: validateLayout(initial.layout).data ?? [], future: [] }))

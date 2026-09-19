@@ -26,7 +26,8 @@ Visual page and theme builder for [Payload CMS](https://payloadcms.com). Build p
 | Site style | Global colors and fonts that every widget can reference, container width, breakpoints, custom CSS |
 | Theme templates | Header, footer, 404 and more, shown by display conditions (entire site, front page, specific pages, exclusions) |
 | Dynamic values | Site name, page title, excerpt, date, any document field, featured image, URL parameters, current user, current date |
-| Coming soon | Ecommerce widgets (product grid, single product, cart, checkout), more widgets, and inline text editing on the canvas |
+| Commerce | **Products** grid and **Price** widgets for `@payloadcms/plugin-ecommerce` or any products collection, with field mapping, currency formatting and stock badges |
+| Coming soon | Add to cart, cart and checkout, variant pickers, more widgets, and inline text editing on the canvas |
 | Import | Layouts and templates exported from page-builder style JSON (containers and legacy sections/columns) |
 
 ### Accessibility

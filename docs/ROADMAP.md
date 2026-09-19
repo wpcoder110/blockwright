@@ -11,11 +11,12 @@ What exists today, and what is planned next. Dates are intentions, not promises.
 - Theme templates: header, footer, 404, with display conditions
 - Site style: global colours, fonts, breakpoints, custom CSS
 - Custom widgets built in the admin from fields or JSON
+- Commerce: Products grid and Price widgets that work with `@payloadcms/plugin-ecommerce` or any products collection
 - Rendering: React Server Components, minimal CSS, WCAG 2.1 AA checks in CI
 
 ## Next
 
-- **Ecommerce widgets**: product grid, single product (title, price, gallery, variants, stock), add to cart, cart and checkout, working with `@payloadcms/plugin-ecommerce`
+- **Ecommerce**: add to cart, cart and checkout, variant pickers and category filters (the Products grid and Price widgets ship already)
 - Inline text editing on the canvas
 - More widgets: countdown, pricing table, posts grid, breadcrumbs, search
 - Loop templates for any collection

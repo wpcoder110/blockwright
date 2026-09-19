@@ -58,6 +58,8 @@ export const WIDGET_ICONS: Record<string, () => ReactNode> = {
   divider: Icon.divider,
   html: Icon.code,
   form: Icon.form,
+  'product-grid': () => svg(<><path d="M3 4h2l2.2 10h10L20 7H6" /><circle cx="9" cy="19" r="1.6" /><circle cx="17" cy="19" r="1.6" /></>),
+  'product-price': () => svg(<><path d="M3 12V3h9l9 9-9 9z" /><circle cx="7.5" cy="7.5" r="1.5" /></>),
   'nav-menu': () => svg(<><path d="M3 6h18M3 12h18M3 18h18" /></>),
   icon: () => svg(<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z" />),
   'icon-box': () => svg(<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="m12 6 1.5 3 3 .5-2.2 2 .6 3L12 13l-2.9 1.5.6-3-2.2-2 3-.5zM7 18h10" /></>),

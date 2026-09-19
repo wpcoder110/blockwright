@@ -53,7 +53,8 @@
     "@blockwright/widgets-basic": "workspace:*",
     "sanitize-html": "^2.17.0",
     "@blockwright/editor": "workspace:*",
-    "@blockwright/renderer": "workspace:*"
+    "@blockwright/renderer": "workspace:*",
+    "@blockwright/widgets-commerce": "workspace:*"
   },
   "peerDependencies": {
     "payload": "^3.0.0",
