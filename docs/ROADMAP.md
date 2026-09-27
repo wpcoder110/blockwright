@@ -14,6 +14,12 @@ What exists today, and what is planned next. Dates are intentions, not promises.
 - Commerce: Products, Price, Add to cart, Cart, Cart button and Checkout widgets, product templates, and a cart and checkout API
 - Rendering: React Server Components, minimal CSS, WCAG 2.1 AA checks in CI
 
+## Recent fixes (0.2.1)
+
+- Keyboard shortcuts work while focus is in the canvas, and Escape closes the library and other dialogs
+- Google Fonts no longer hold up the page when the network blocks them
+- Plugin options typecheck before `payload generate:types` has run
+
 ## Next
 
 - **Payments**: card payments through the ecommerce plugin's adapters, plus local methods such as JazzCash and Easypaisa

@@ -113,3 +113,28 @@ test.describe('builder features', () => {
     await expect(page.locator('.bw-print-page')).toContainText(`Entry #${entry.id}`)
   })
 })
+
+test.describe('dialogs', () => {
+  test.skip(!email || !password, 'set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD')
+  test.skip(({ isMobile }) => isMobile, 'the editor is a desktop tool')
+
+  test('Escape closes the library, even with focus in the canvas', async ({ page }) => {
+    const res = await page.request.post('/api/users/login', { data: { email, password } })
+    expect(res.ok()).toBeTruthy()
+    const home = (await (await page.request.get('/api/pages?where[slug][equals]=home&depth=0')).json()).docs[0]
+    await page.goto(`/admin/blockwright/edit/pages/${home.id}`)
+    const canvas = page.frameLocator('iframe[title="Page canvas"]')
+    await expect(canvas.locator('h1.bw-heading')).toBeVisible({ timeout: 60_000 })
+
+    // focus starts inside the canvas iframe, which used to swallow the key
+    await canvas.locator('h1.bw-heading').click()
+    await page.locator('button[title^="Library"]').click()
+    await expect(page.locator('.bwe-library')).toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(page.locator('.bwe-library')).toBeHidden()
+
+    // and the top bar responds again straight away
+    await page.locator('button[title^="Structure"]').click()
+    await expect(page.locator('.bwe-structure')).toBeVisible()
+  })
+})

@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
+import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { type Control, type Device, evaluateCondition, getResponsiveValue, responsiveKey } from '@blockwright/core'
 import { buildTagString, generateId, parseGlobalRef, parseTagString } from '@blockwright/schema'
 import { useEditor } from '../context'
@@ -7,6 +7,7 @@ import { MediaPicker } from './media'
 import { LogicEditor } from './logic'
 import { RichText } from './richtext'
 import { IconPicker } from './icon'
+import { useEscapeKey } from '../useEscape'
 import { buildNotification, replacePlaceholders } from '@blockwright/forms'
 import { type TemplateSummary, fetchMenu, listDocs, listTemplates } from '../api'
 import { createContext, useContext } from 'react'
@@ -995,6 +996,7 @@ function EmailPreviewButton({ notification }: { notification: Values }) {
   const { kit, site, meta } = useEditor()
   const fields = useFormFields()
   const [open, setOpen] = useState(false)
+  useEscapeKey(useCallback(() => setOpen(false), []), open)
   const sample = useMemo(
     () =>
       fields.map((f) => ({

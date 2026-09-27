@@ -3,6 +3,7 @@ import { type Element, cloneWithNewIds, parseConditions, parseTemplateEnvelope }
 import { type TemplateSummary, createTemplate, downloadJson, getTemplate, listTemplates } from './api'
 import { LayoutPreview } from './preview'
 import { useEditor } from './context'
+import { useEscapeKey } from './useEscape'
 import { Icon, widgetIcon } from './icons'
 import { findElementById, findWithParent, isDescendant } from './tree'
 import { countElements } from '@blockwright/schema'
@@ -402,11 +403,13 @@ export function Library({ mode, saveElementId, onClose }: { mode: 'templates' | 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab])
 
+  useEscapeKey(useCallback(() => (previewId ? setPreviewId(null) : onClose()), [previewId, onClose]))
+
+  // move focus into the dialog when it opens, so the keyboard reaches it
+  const backRef = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && (previewId ? setPreviewId(null) : onClose())
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [previewId, onClose])
+    backRef.current?.focus({ preventScroll: true })
+  }, [])
 
   const filtered = useMemo(() => {
     const types = TYPE_FILTERS.find((f) => f[0] === filter)?.[2]
@@ -448,7 +451,22 @@ export function Library({ mode, saveElementId, onClose }: { mode: 'templates' | 
   ]
 
   return (
-    <div className="bwe-modal-back" role="dialog" aria-modal="true" aria-label="Library" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="bwe-modal-back"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Library"
+      ref={backRef}
+      tabIndex={-1}
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          e.stopPropagation()
+          if (previewId) setPreviewId(null)
+          else onClose()
+        }
+      }}
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div className="bwe-modal bwe-library">
         <nav className="bwe-lib-nav" aria-label="Library sections">
           <div className="bwe-lib-brand">Library</div>

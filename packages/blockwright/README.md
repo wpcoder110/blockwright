@@ -22,7 +22,21 @@ export default buildConfig({
 })
 ```
 
-Then run `payload generate:importmap`, open a document in the admin and click **Edit with Blockwright**.
+Then:
+
+```bash
+npx payload generate:types      # so the plugin options typecheck against your collections
+npx payload generate:importmap  # so the admin can load Blockwright's components
+```
+
+Open a document in the admin and click **Edit with Blockwright**.
+
+Two things that catch people out on a first run:
+
+- **Images don't show on the site?** Payload's default access is logged-in only. Add `access: { read: () => true }` to your `media` collection.
+- **Building?** On the Payload blank template use `next build`; older `payload build` scripts no longer exist in Payload 3.9x.
+
+[Watch the walkthrough](https://www.youtube.com/watch?v=pImsxnkGxXs)
 
 Render pages in Next.js:
 

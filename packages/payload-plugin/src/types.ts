@@ -51,7 +51,7 @@ export type BlockwrightPluginConfig = {
    * Collections that get a Blockwright layout, either as slugs or with options each.
    * Default: `['pages']` when that collection exists.
    */
-  collections?: CollectionSlug[] | Partial<Record<CollectionSlug, BlockwrightCollectionConfig | true>>
+  collections?: Array<CollectionSlug | (string & {})> | Partial<Record<CollectionSlug | (string & {}), BlockwrightCollectionConfig | true>>
   /** Keep the schema but skip hooks, endpoints and admin components. */
   disabled?: boolean
   /** Extra widgets, registered on the site and in the API. */

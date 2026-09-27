@@ -23,7 +23,13 @@ export default buildConfig({
 })
 ```
 
-> **Status: 0.1.0, early but working.** Ecommerce widgets and more are coming soon. The visual editor, widgets, form builder, theme templates, site style and the Payload plugin work today. More widgets, commerce widgets and inline text editing are next. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what is coming next.
+## Watch it in action
+
+[![Blockwright: a visual page builder for Payload CMS](https://img.youtube.com/vi/pImsxnkGxXs/maxresdefault.jpg)](https://www.youtube.com/watch?v=pImsxnkGxXs)
+
+*Click to watch the walkthrough on YouTube.*
+
+> **Status: 0.2.0, early but working.** The visual editor, widgets, form builder, menus, commerce widgets, theme and PDF templates, site style and the Payload plugin all work today. Card payments, variant pickers and inline text editing are next. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what is coming next.
 
 ## What you get
 
@@ -223,7 +229,7 @@ The plugin adds:
 - the visual editor at `/admin/blockwright/edit/<collection>/<id>`, with an **Edit with Blockwright** button on each document;
 - the dashboard panel.
 
-Then run `payload generate:importmap`. Forms send email through the email adapter configured in Payload.
+Then run `payload generate:types` and `payload generate:importmap`. Forms send email through the email adapter configured in Payload.
 
 **2. Render pages** in your Next.js route:
 

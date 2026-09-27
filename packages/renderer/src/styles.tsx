@@ -24,7 +24,18 @@ export function BlockwrightStyles({ compiled, kit, includeKit = true }: { compil
       {fontsHref ? (
         <>
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-          <link rel="stylesheet" href={fontsHref} precedence="bw-fonts" />
+          {/* loaded as a print stylesheet, then switched on once it arrives, so a blocked or slow
+              Google Fonts request never holds up the page */}
+          <link rel="stylesheet" href={fontsHref} precedence="bw-fonts" media="print" data-bw-fonts="" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                "(function(){var l=document.querySelectorAll('link[data-bw-fonts]');for(var i=0;i<l.length;i++){(function(x){if(x.sheet){x.media='all';}else{x.addEventListener('load',function(){x.media='all'});x.addEventListener('error',function(){x.media='all'})}})(l[i])}})()",
+            }}
+          />
+          <noscript>
+            <link rel="stylesheet" href={fontsHref} />
+          </noscript>
         </>
       ) : null}
       {kitCss ? (

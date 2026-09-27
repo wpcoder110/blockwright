@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { DEFAULT_KIT, createRegistry } from '@blockwright/core'
 import { validateLayout } from '@blockwright/schema'
-import { RenderElements, buildLayout, createCustomWidget, renderTemplate } from '../src'
+import { BlockwrightStyles, RenderElements, buildLayout, createCustomWidget, renderTemplate } from '../src'
 
 describe('template engine', () => {
   it('escapes values and supports raw, if/else, each and paths', () => {
@@ -92,5 +92,24 @@ describe('custom widgets', () => {
     expect(controls[0]!.fields!.map((f) => f.name)).toEqual(['name'])
     expect(controls.some((c) => c.name === 'bad name!')).toBe(false)
     expect(controls.some((c) => c.name === 'box_background')).toBe(true)
+  })
+})
+
+describe('web fonts', () => {
+  it('loads Google Fonts without blocking the page, with a no-JavaScript fallback', () => {
+    const kit = { ...DEFAULT_KIT, fontProvider: 'google' as const, typography: [{ id: 'primary', title: 'Headings', fontFamily: 'Poppins' }] }
+    const html = renderToStaticMarkup(<BlockwrightStyles compiled={{ css: '', base: {}, fonts: ['Inter'] }} kit={kit} />)
+    expect(html).toContain('fonts.googleapis.com')
+    // a print stylesheet does not hold up first paint; the script switches it on once it arrives
+    expect(html).toContain('media="print"')
+    expect(html).toContain('data-bw-fonts')
+    expect(html).toContain("x.media='all'")
+    expect(html).toContain('<noscript>')
+  })
+
+  it('adds nothing when the site uses system fonts', () => {
+    const kit = { ...DEFAULT_KIT, fontProvider: 'system' as const }
+    const html = renderToStaticMarkup(<BlockwrightStyles compiled={{ css: '', base: {}, fonts: [] }} kit={kit} />)
+    expect(html).not.toContain('fonts.googleapis.com')
   })
 })

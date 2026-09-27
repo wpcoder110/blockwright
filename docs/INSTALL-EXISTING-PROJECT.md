@@ -90,6 +90,7 @@ plugins: [
 Then regenerate the admin import map:
 
 ```powershell
+npx cross-env PAYLOAD_CONFIG_PATH=./dev/payload.config.ts payload generate:types
 npx cross-env PAYLOAD_CONFIG_PATH=./dev/payload.config.ts payload generate:importmap
 ```
 
@@ -111,10 +112,11 @@ Then continue with the checklist in [`TESTING.md`](TESTING.md).
 
 ## Using it with @payloadcms/plugin-ecommerce
 
-Install the version that matches your Payload version exactly (`npm ls payload`), and turn on products:
+Install the version that matches your Payload version **exactly** (check with `npm ls payload`; for Payload 3.90.1 use `@payloadcms/plugin-ecommerce@3.90.1`), and turn on products:
 
 ```powershell
-npm install @payloadcms/plugin-ecommerce@3.84.1
+npm ls payload                                   # note the version, e.g. 3.90.1
+npm install @payloadcms/plugin-ecommerce@3.90.1   # must match the line above
 ```
 
 ```ts
@@ -166,6 +168,8 @@ Always regenerate the import map after updating: new versions can add admin comp
 | Admin error mentioning `BlockwrightWelcome`, `EditWithBlockwright` or the import map | Run the `generate:importmap` command from step 5 again. |
 | Images do not appear on the site | Add `access: { read: () => true }` to your `media` collection. Payload requires a login by default, so visitors and the image optimiser get an error. |
 | `DATABASE_URL is missing` when running a `payload` command | The CLI reads `.env` from the folder you run it in. Copy `dev\.env` to the project root, or pass the value inline with `cross-env`. |
+| `TS2353: 'pages' does not exist in type …` | Run `payload generate:types` so your `payload-types.ts` knows the collection. |
+| `payload build` fails with "unknown command" | Payload 3.9x has no `build` command. Use `next build` (and `next start`). |
 | Home page returns 404 | Install the demo content, or create a page with the slug `home` and publish it. |
 | A layout change is not showing | The page must be published. Drafts are only visible in preview. |
 | Old code after updating | Delete `dev\.next` and restart. |

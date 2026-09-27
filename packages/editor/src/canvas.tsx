@@ -199,7 +199,23 @@ export function Canvas() {
       } else ed.insert(target.pos, [w], w.id)
     }
     const onScroll = () => setTick((t) => t + 1)
-    const onKey = (e: KeyboardEvent) => window.dispatchEvent(new KeyboardEvent('keydown', e))
+    // a native event's fields live on its prototype, so KeyboardEventInit copies
+    // nothing from it: list them, or the forwarded event arrives with key === ''
+    const onKey = (e: KeyboardEvent) =>
+      window.dispatchEvent(
+        new KeyboardEvent('keydown', {
+          key: e.key,
+          code: e.code,
+          location: e.location,
+          repeat: e.repeat,
+          ctrlKey: e.ctrlKey,
+          metaKey: e.metaKey,
+          shiftKey: e.shiftKey,
+          altKey: e.altKey,
+          bubbles: true,
+          cancelable: true,
+        }),
+      )
     frameDoc.addEventListener('click', onClick, true)
     frameDoc.addEventListener('submit', onSubmit, true)
     frameDoc.addEventListener('mouseover', onOver)
