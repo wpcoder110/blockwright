@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/payload-plugin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Payload CMS plugin for Blockwright: layouts, templates, menus, forms and the visual editor",
   "license": "MIT",
   "type": "module",

@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/editor",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Visual drag-and-drop editor for Blockwright, the page builder for Payload CMS",
   "license": "MIT",
   "type": "module",

@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/forms",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Form builder for Blockwright: fields, conditional logic, multi-step forms and email notifications",
   "license": "MIT",
   "type": "module",

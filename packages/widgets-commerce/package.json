@@ -1,6 +1,6 @@
 {
   "name": "@blockwright/widgets-commerce",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Commerce widgets for Blockwright: product grid and price, working with any products collection",
   "license": "MIT",
   "type": "module",
