@@ -1,7 +1,7 @@
-# Release refs/tags/v0.2.0 (35831755555)
+# Release refs/tags/v0.2.1 (36345017226)
 
 npm notice
-npm notice 📦  @blockwright/schema@0.2.0
+npm notice 📦  @blockwright/schema@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 207B README.md
@@ -11,19 +11,19 @@ npm notice 21.0kB dist/index.js.map
 npm notice 1.5kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/schema
-npm notice version: 0.2.0
-npm notice filename: blockwright-schema-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-schema-0.2.1.tgz
 npm notice package size: 10.7 kB
 npm notice unpacked size: 39.3 kB
-npm notice shasum: cb187b834edb1ca0b9158cb9bced4a54b209f111
-npm notice integrity: sha512-gH5g/fe7goEKu[...]LpsfwqfiDQP7g==
+npm notice shasum: c157bdd6228a1568bb1ec9567a13b510e1194f13
+npm notice integrity: sha512-mb6IGcDdzCM3D[...]qzPAOndWbXxCg==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/schema@0.2.0
++ @blockwright/schema@0.2.1
 npm notice
-npm notice 📦  @blockwright/core@0.2.0
+npm notice 📦  @blockwright/core@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 205B README.md
@@ -33,41 +33,41 @@ npm notice 106.2kB dist/index.js.map
 npm notice 1.5kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/core
-npm notice version: 0.2.0
-npm notice filename: blockwright-core-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-core-0.2.1.tgz
 npm notice package size: 47.3 kB
 npm notice unpacked size: 179.2 kB
-npm notice shasum: ae1bc7b8d59a795a65dcfe47e4a8ad3c06873d5c
-npm notice integrity: sha512-2fgmu6naG4JeL[...]DQICpKngdVWuQ==
+npm notice shasum: 7ad8c47e56232e6347c0f6b40f87613fe9475b90
+npm notice integrity: sha512-lw1bRzeHxbgth[...]ipsnSpH+NBagA==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/core@0.2.0
++ @blockwright/core@0.2.1
 npm notice
-npm notice 📦  @blockwright/renderer@0.2.0
+npm notice 📦  @blockwright/renderer@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 209B README.md
 npm notice 5.6kB dist/index.d.ts
-npm notice 26.0kB dist/index.js
-npm notice 48.2kB dist/index.js.map
+npm notice 26.6kB dist/index.js
+npm notice 49.1kB dist/index.js.map
 npm notice 1.8kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/renderer
-npm notice version: 0.2.0
-npm notice filename: blockwright-renderer-0.2.0.tgz
-npm notice package size: 25.6 kB
-npm notice unpacked size: 82.9 kB
-npm notice shasum: b3c8465e3df1f669808b2b4ef6756a1e26d9c5ac
-npm notice integrity: sha512-ITmNXMd+1hlSs[...]TPkUaOEzg9VOg==
+npm notice version: 0.2.1
+npm notice filename: blockwright-renderer-0.2.1.tgz
+npm notice package size: 26.0 kB
+npm notice unpacked size: 84.4 kB
+npm notice shasum: fc386ad2f55bebe1f432e58e855b34bd9030766c
+npm notice integrity: sha512-stiUzAkpSAVW8[...]aO/PM1II2On2A==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/renderer@0.2.0
++ @blockwright/renderer@0.2.1
 npm notice
-npm notice 📦  @blockwright/forms@0.2.0
+npm notice 📦  @blockwright/forms@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 206B README.md
@@ -92,19 +92,19 @@ npm notice 71B dist/validate.js.map
 npm notice 2.3kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/forms
-npm notice version: 0.2.0
-npm notice filename: blockwright-forms-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-forms-0.2.1.tgz
 npm notice package size: 66.3 kB
 npm notice unpacked size: 269.7 kB
-npm notice shasum: b0481278bc5d4efc225fe42bd5b77e269bcda46a
-npm notice integrity: sha512-a3QDYdw1KZZ8u[...]+o4uQWfko77Yg==
+npm notice shasum: 5ccc98752eca2a8224ea3c8264f3339a11dfb566
+npm notice integrity: sha512-5MfPJATjYtQlN[...]Lrklcnnh+aJbA==
 npm notice total files: 21
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/forms@0.2.0
++ @blockwright/forms@0.2.1
 npm notice
-npm notice 📦  @blockwright/widgets-basic@0.2.0
+npm notice 📦  @blockwright/widgets-basic@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 214B README.md
@@ -114,19 +114,19 @@ npm notice 158.3kB dist/index.js.map
 npm notice 1.8kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/widgets-basic
-npm notice version: 0.2.0
-npm notice filename: blockwright-widgets-basic-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-widgets-basic-0.2.1.tgz
 npm notice package size: 59.0 kB
 npm notice unpacked size: 261.1 kB
-npm notice shasum: 1583d970922d573e9b9b88bce291844bd930ad6f
-npm notice integrity: sha512-t3SyG2ku3Mzxw[...]QLZlyof1N9xWA==
+npm notice shasum: de152c79f1c1fa26d88b0e21108b712f95c1f947
+npm notice integrity: sha512-Xqb/VLMDyvWeP[...]g536zEE1b3gvg==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/widgets-basic@0.2.0
++ @blockwright/widgets-basic@0.2.1
 npm notice
-npm notice 📦  @blockwright/widgets-commerce@0.2.0
+npm notice 📦  @blockwright/widgets-commerce@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 189B README.md
@@ -139,40 +139,41 @@ npm notice 49.6kB dist/index.js.map
 npm notice 1.7kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/widgets-commerce
-npm notice version: 0.2.0
-npm notice filename: blockwright-widgets-commerce-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-widgets-commerce-0.2.1.tgz
 npm notice package size: 30.9 kB
 npm notice unpacked size: 116.3 kB
-npm notice shasum: f08346035ea1de3df95cb489c6a0d94db94939a3
-npm notice integrity: sha512-QWXlTcRFohgBh[...]Gy8kBj/wU+3Xg==
+npm notice shasum: 858cc145ca090a460a6cebb4a82e87244a3265f7
+npm notice integrity: sha512-O9lostna34zkV[...]AbSO/AqXgpyUw==
 npm notice total files: 9
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
-+ @blockwright/widgets-commerce@0.2.0
+npm notice Your package is being processed and may take a few minutes to become available.
++ @blockwright/widgets-commerce@0.2.1
 npm notice
-npm notice 📦  @blockwright/editor@0.2.0
+npm notice 📦  @blockwright/editor@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 207B README.md
 npm notice 4.1kB dist/index.d.ts
-npm notice 188.5kB dist/index.js
-npm notice 314.2kB dist/index.js.map
+npm notice 190.3kB dist/index.js
+npm notice 317.7kB dist/index.js.map
 npm notice 1.9kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/editor
-npm notice version: 0.2.0
-npm notice filename: blockwright-editor-0.2.0.tgz
-npm notice package size: 118.4 kB
-npm notice unpacked size: 510.0 kB
-npm notice shasum: 77d89b27e8b7eafb979dec0eddb07f488b0523fb
-npm notice integrity: sha512-cAB1eDe4Q1LdK[...]Y7Ga+L3H6vJ/Q==
+npm notice version: 0.2.1
+npm notice filename: blockwright-editor-0.2.1.tgz
+npm notice package size: 120.0 kB
+npm notice unpacked size: 515.4 kB
+npm notice shasum: 6f070801f7bba5fb369edbda10bbeec992cbb42b
+npm notice integrity: sha512-/ChqhYYpi/7LH[...]jdeBbXtsEi8ZA==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/editor@0.2.0
++ @blockwright/editor@0.2.1
 npm notice
-npm notice 📦  @blockwright/payload-plugin@0.2.0
+npm notice 📦  @blockwright/payload-plugin@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 215B README.md
@@ -193,19 +194,19 @@ npm notice 49.0kB dist/rsc.js.map
 npm notice 2.6kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/payload-plugin
-npm notice version: 0.2.0
-npm notice filename: blockwright-payload-plugin-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-payload-plugin-0.2.1.tgz
 npm notice package size: 100.6 kB
 npm notice unpacked size: 385.2 kB
-npm notice shasum: af26eb85d7df916fa43f420170701c6c57a4c234
-npm notice integrity: sha512-6posaebLAbma9[...]/DQTdh+oXMLng==
+npm notice shasum: 6f446f9b8685f614fa43e6422c1620dc26f018cb
+npm notice integrity: sha512-FOEnd/LlyGGPG[...]xlUgKcPvNThfQ==
 npm notice total files: 17
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/payload-plugin@0.2.0
++ @blockwright/payload-plugin@0.2.1
 npm notice
-npm notice 📦  @blockwright/next@0.2.0
+npm notice 📦  @blockwright/next@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
 npm notice 205B README.md
@@ -215,22 +216,22 @@ npm notice 13.5kB dist/index.js.map
 npm notice 1.9kB package.json
 npm notice Tarball Details
 npm notice name: @blockwright/next
-npm notice version: 0.2.0
-npm notice filename: blockwright-next-0.2.0.tgz
+npm notice version: 0.2.1
+npm notice filename: blockwright-next-0.2.1.tgz
 npm notice package size: 7.8 kB
 npm notice unpacked size: 27.1 kB
-npm notice shasum: 378b86b14cecaf2f0dbf71936f3c0c081d791d26
-npm notice integrity: sha512-xyA4OhgvAdp6M[...]PSHDMG+I2w2Sg==
+npm notice shasum: 16e71ca882f2f3decfaf6ee7ea4fb6fc088157fe
+npm notice integrity: sha512-mndF+D+hcbVpF[...]b2fCkGI/n/dqw==
 npm notice total files: 6
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ @blockwright/next@0.2.0
++ @blockwright/next@0.2.1
 npm notice
-npm notice 📦  blockwright@0.2.0
+npm notice 📦  blockwright@0.2.1
 npm notice Tarball Contents
 npm notice 1.1kB LICENSE
-npm notice 1.1kB README.md
+npm notice 1.6kB README.md
 npm notice 109B dist/client.d.ts
 npm notice 207B dist/client.js
 npm notice 230B dist/client.js.map
@@ -258,14 +259,14 @@ npm notice 588B dist/widgets.js.map
 npm notice 3.3kB package.json
 npm notice Tarball Details
 npm notice name: blockwright
-npm notice version: 0.2.0
-npm notice filename: blockwright-0.2.0.tgz
-npm notice package size: 3.9 kB
-npm notice unpacked size: 10.7 kB
-npm notice shasum: ad70a93f45a5f6165bc5d5c7e65965d4a792cbfb
-npm notice integrity: sha512-T+f/yFyaVQ1TE[...]g41/vOFKrpz7A==
+npm notice version: 0.2.1
+npm notice filename: blockwright-0.2.1.tgz
+npm notice package size: 4.2 kB
+npm notice unpacked size: 11.2 kB
+npm notice shasum: 5832710f6f1497381c2864bd67c3d2c29550d1f5
+npm notice integrity: sha512-ja5+S7oLJ/S+g[...]c1KDcIxrwalAQ==
 npm notice total files: 27
 npm notice
 npm notice Publishing to https://registry.npmjs.org/ with tag latest and public access
 npm notice Your package is being processed and may take a few minutes to become available.
-+ blockwright@0.2.0
++ blockwright@0.2.1
