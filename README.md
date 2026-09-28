@@ -1,4 +1,4 @@
-# Blockwright — visual page builder plugin for Payload CMS
+# Blockwright — an Elementor-class visual builder for Payload CMS
 
 [![npm](https://img.shields.io/npm/v/blockwright)](https://www.npmjs.com/package/blockwright)
 [![Payload CMS plugin](https://img.shields.io/badge/Payload%20CMS-plugin-000000)](https://payloadcms.com)
@@ -7,9 +7,9 @@
 [![downloads](https://img.shields.io/npm/dm/blockwright)](https://www.npmjs.com/package/blockwright)
 [![licence](https://img.shields.io/npm/l/blockwright)](LICENSE)
 
-**A Payload CMS plugin** that adds a drag-and-drop visual page and theme builder to your admin panel: build pages, headers, footers, menus, forms and shop pages from widgets, style them without writing CSS, and render them as fast, SEO-friendly React Server Components.
+**Blockwright is an open-source visual website and theme builder for [Payload CMS](https://payloadcms.com), inspired by the Elementor editing experience.** Build complete responsive pages *and* the theme around them — headers, footers, single and archive layouts, 404s — from widgets, with a structure navigator, reusable templates, a template library, global styling, dynamic Payload data, forms, menus and commerce. All without giving up Payload's developer flexibility: it is a normal plugin, your content stays in your collections, and pages render as React Server Components.
 
-**Inspired by Elementor for WordPress, and now you have Blockwright for Payload CMS.**
+This is not another block list. Payload's built-in Blocks let editors pick from components a developer defined; Blockwright gives them a canvas, layout containers, responsive controls per breakpoint, style controls on every widget, and the ability to build the theme itself. Different problems.
 
 ```bash
 npm install blockwright
@@ -23,6 +23,46 @@ export default buildConfig({
 })
 ```
 
+## What's inside
+
+```
+Blockwright
+├── Visual canvas ............ drag, drop, select, style, undo/redo, keyboard shortcuts
+├── Structure navigator ...... the page as a tree; drag to reorder or reparent
+├── Widgets .................. 32 built in, plus your own from the admin or in code
+├── Containers / layout ...... flex frames: direction, alignment, gaps, wrapping
+├── Responsive controls ...... six breakpoints, per-device values on most settings
+├── Theme builder
+│   ├── Header
+│   ├── Footer
+│   ├── Single (page, post, product, any document)
+│   ├── Archive and search results
+│   └── 404
+├── Template library ......... save, browse with live previews, insert, import, export
+├── Reusable sections ........ save any section and drop it into other pages
+├── Global styling ........... colours, fonts, breakpoints and custom CSS in one place
+├── Dynamic Payload data ..... 15 dynamic values bound to fields, docs, site and user
+├── Display conditions ....... which template shows where, with include/exclude rules
+├── Forms .................... 19 field types, multi-step, logic, notifications, entries
+├── Menus .................... nested navigation with dropdowns and a mobile menu
+├── Commerce ................. products, price, cart, checkout, product templates
+├── PDF templates ............ design how a form entry prints
+├── Live preview ............. drafts previewed on the real site before publishing
+└── Publishing ............... drafts, publish, and Payload versioning underneath
+```
+
+## Why it goes further than it looks
+
+| | |
+| --- | --- |
+| **Theme, not just pages** | Headers, footers, single and archive layouts and 404s are designed visually, with display rules deciding where each one applies |
+| **Design controls** | Typography, background, border, radius, shadow, padding, margin, z-index, position, entrance animations and custom CSS per element |
+| **Six breakpoints** | Widescreen, laptop, tablet landscape, tablet, large mobile and mobile, editable per device |
+| **Dynamic content** | Bind any text, link or image to Payload fields, the current document, the site or the logged-in user |
+| **Extensible** | Build widgets in the admin from fields and an HTML template, or register React widgets in code |
+| **Compatible** | Imports the widely used container JSON format, so existing page-builder templates can be brought over |
+| **Fast and accessible** | React Server Components, no page JavaScript beyond forms and cart, WCAG 2.1 AA checked in CI |
+
 ## Watch it in action
 
 [![Blockwright: a visual page builder for Payload CMS](https://img.youtube.com/vi/pImsxnkGxXs/maxresdefault.jpg)](https://www.youtube.com/watch?v=pImsxnkGxXs)
@@ -31,7 +71,7 @@ export default buildConfig({
 
 > **Status: 0.2.0, early but working.** The visual editor, widgets, form builder, menus, commerce widgets, theme and PDF templates, site style and the Payload plugin all work today. Card payments, variant pickers and inline text editing are next. See [`docs/ROADMAP.md`](docs/ROADMAP.md) for what is coming next.
 
-## What you get
+## Full feature list
 
 | Area | Included in this release |
 | --- | --- |
@@ -40,13 +80,13 @@ export default buildConfig({
 | Structure | Floating, movable page tree (Ctrl+I) with drag-to-reorder |
 | Layout | **Frame**: flexbox or grid, boxed or full width, responsive direction, gaps, wrapping, columns, semantic tags (`section`, `header`, `nav`…) |
 | Navigation | **Menus** collection (links to pages follow slug changes, up to three levels) and a **Nav menu** widget: dropdowns, current-page highlighting, hover effects, and a mobile menu that works without JavaScript |
-| Widgets | Nav menu, Heading, Text, Button, Image, Spacer, Divider, Icon, Icon box, Image box, Icon list, Social icons, Alert, Video (lightweight YouTube/Vimeo/self-hosted), Gallery, Google Maps, Tabs, Accordion (with FAQ schema), Testimonial, Counter, Progress bar, Star rating, Custom HTML |
+| Widgets (32) | Nav menu, Heading, Text, Button, Image, Spacer, Divider, Icon, Icon box, Image box, Icon list, Social icons, Alert, Video (lightweight YouTube/Vimeo/self-hosted), Gallery, Google Maps, Tabs, Accordion (with FAQ schema), Testimonial, Counter, Progress bar, Star rating, Custom HTML, and the commerce and form widgets below |
 | Custom widgets | Build widgets in the admin from fields (or JSON) and an HTML template, see [`docs/CUSTOM_WIDGETS.md`](docs/CUSTOM_WIDGETS.md) |
 | Forms | Visual field builder with drag-to-reorder and show/hide rules. 19 field types, multi-step with progress indicator, conditional logic, inline validation, spam protection (honeypot, time trap, rate limit), works without JavaScript. Actions: save entry, email notifications (any number, several recipients, HTML or plain-text templates with field placeholders, send-only-when rules, preview), redirect, signed webhook, create a document |
 | Form entries | Readable entry view; **PDF templates** designed in the visual editor (Entry answers widget and entry placeholders) for print or save as PDF |
 | Styling | Typography, colors, backgrounds and gradients, borders, radius, shadows, spacing — per device (desktop, tablet, mobile, plus optional laptop, widescreen and extra breakpoints) |
 | Site style | Global colors and fonts that every widget can reference, container width, breakpoints, custom CSS |
-| Theme templates | Header, footer, 404 and more, shown by display conditions (entire site, front page, specific pages, exclusions) |
+| Theme builder | Header, footer, single page, single post, single product, any-document single, archive, search results, 404, reusable section, page template, popup and PDF template types, each shown by display conditions (entire site, front page, a collection, a specific document, exclusions) |
 | Dynamic values | Site name, page title, excerpt, date, any document field, featured image, URL parameters, current user, current date |
 | Commerce | **Products**, **Price**, **Add to cart**, **Cart**, **Cart button** and **Checkout** widgets for `@payloadcms/plugin-ecommerce` or any products collection, plus visually edited product templates. See [`docs/COMMERCE.md`](docs/COMMERCE.md) |
 | Coming soon | Card payments, variant pickers, more widgets, and inline text editing on the canvas |

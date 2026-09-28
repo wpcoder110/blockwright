@@ -1,8 +1,20 @@
-# blockwright — visual page builder plugin for Payload CMS
+# blockwright — an Elementor-class visual builder for Payload CMS
 
 [![Payload CMS plugin](https://img.shields.io/badge/Payload%20CMS-plugin-000000)](https://payloadcms.com)
 
-**A Payload CMS plugin.** Visual page and theme builder for [Payload CMS](https://payloadcms.com): a drag-and-drop editor in the admin, widgets, a form builder, menus, theme templates and PDF templates. Pages render as React Server Components, so the site stays fast.
+**An open-source visual website and theme builder for [Payload CMS](https://payloadcms.com), inspired by the Elementor editing experience.** Build complete responsive pages *and* the theme around them — headers, footers, single and archive layouts, 404s — from widgets, with a structure navigator, reusable templates, a template library, global styling, dynamic Payload data, forms, menus and commerce, while your content stays in your own collections and pages render as React Server Components.
+
+```
+Blockwright
+├── Visual canvas, structure navigator, 32 widgets, layout frames
+├── Six responsive breakpoints and style controls on every element
+├── Theme builder: header, footer, single, archive, search, 404, popup
+├── Template library, reusable sections, import and export
+├── Global styling, dynamic Payload data, display conditions
+├── Forms with logic, notifications, entries and PDF templates
+├── Menus, commerce (products, cart, checkout) and live preview
+└── Publishing with Payload drafts and versions
+```
 
 ```bash
 pnpm add blockwright
